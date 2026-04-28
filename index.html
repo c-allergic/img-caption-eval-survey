@@ -51,7 +51,7 @@
       color: #fff;
       border-radius: 16px;
       padding: 2rem 2.5rem;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       position: relative;
       overflow: hidden;
     }
@@ -84,6 +84,92 @@
     .featured .interesting strong { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
     .featured .interesting ul { margin-top: 0.4rem; padding-left: 1.2rem; font-size: 0.9rem; }
     .featured .interesting li { margin-bottom: 0.3rem; }
+
+    /* Pipeline Section */
+    .pipeline-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .pipeline-section h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+    .pipeline-section h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .pipeline-section .diagram {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .pipeline-section .diagram svg {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .pipeline-steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 640px) {
+      .pipeline-steps { grid-template-columns: 1fr 1fr; }
+    }
+    .step {
+      background: #f7fafc;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.2rem;
+    }
+    .step .num {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      width: 22px; height: 22px;
+      line-height: 22px;
+      text-align: center;
+      border-radius: 50%;
+      margin-right: 0.4rem;
+    }
+    .step h4 { display: inline; font-size: 0.95rem; }
+    .step p { font-size: 0.9rem; color: #2d3748; margin-top: 0.3rem; }
+
+    /* Detail box */
+    .detail-box {
+      background: #f7fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem 1.5rem;
+      margin-top: 1rem;
+    }
+    .detail-box h4 { font-size: 0.9rem; color: var(--accent); margin-bottom: 0.3rem; }
+    .detail-box p, .detail-box ul { font-size: 0.9rem; }
+    .detail-box ul { padding-left: 1.2rem; margin-top: 0.3rem; }
+    .detail-box li { margin-bottom: 0.2rem; }
+
+    .code-block {
+      background: #1a202c;
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      overflow-x: auto;
+      margin: 0.5rem 0;
+    }
+    .code-block .comment { color: #68d391; }
+    .code-block .highlight { color: #f6e05e; }
 
     /* Paper Grid */
     .section-title {
@@ -202,12 +288,95 @@
         <li>First benchmark designed specifically to evaluate <em>controllable-detail captioning</em> — not just "is this caption good?" but "does this caption match the requested level of detail?"</li>
         <li>CapsBench is paired with a purpose-built captioner (PG Captioner), treating caption quality as a first-class evaluation axis in text-to-image systems</li>
         <li>Reflects a broader shift: as diffusion models get better, the bottleneck becomes <em>data quality</em>, and caption evaluation is the gatekeeper of data quality pipelines</li>
+        <li>Dataset released on Hugging Face: <a href="https://huggingface.co/datasets/playgroundai/CapsBench" style="color:#90cdf4">playgroundai/CapsBench</a></li>
       </ul>
     </div>
   </div>
 
+  <!-- 🧬 Pipeline Reconstruction -->
+  <div class="pipeline-section">
+    <h2>Reconstructing CapsBench: The Full Pipeline</h2>
+    <p style="font-size:0.9rem;color:#4a5568;margin-bottom:1rem">
+      The PGv3 paper describes CapsBench concisely but leaves gaps. Below is a faithful reconstruction based on cross-referencing Section 4.2, Section 7, and the DPG-bench / DPG-bench Hard methodology that CapsBench was "inspired by."
+    </p>
+
+    <!-- Diagram -->
+    <div class="diagram">
+      <img src="pipeline.svg" alt="CapsBench Pipeline Diagram" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--border);">
+    </div>
+
+    <!-- Step-by-step -->
+    <h3 style="margin-top:2rem">Phase 1: Benchmark Construction</h3>
+    <div class="pipeline-steps">
+      <div class="step">
+        <div><span class="num">1</span><h4>Image Curation</h4></div>
+        <p>200 images selected across 9 diverse types: film scenes, cartoon scenes, movie posters, invitations, advertisements, casual/street/landscape/interior photography. Covers both natural and synthetic visual domains.</p>
+      </div>
+      <div class="step">
+        <div><span class="num">2</span><h4>QA Pair Generation</h4></div>
+        <p>For each image, yes-no question-answer pairs are generated. Unlike DPG-Bench (where questions are derived from text prompts), CapsBench generates questions from the <strong>image itself</strong>. ~12 questions per image, 2,471 total.</p>
+      </div>
+      <div class="step">
+        <div><span class="num">3</span><h4>17-Category Taxonomy</h4></div>
+        <p>Each question is tagged with one of 17 categories: general, image type, text, color, position, relation, relative position, entity, entity size, entity shape, count, emotion, blur, image artifacts, proper noun, color palette, color grading.</p>
+      </div>
+      <div class="step">
+        <div><span class="num">4</span><h4>Reference Answers</h4></div>
+        <p>Ground truth answers are determined from the image. The paper states most answers are "yes" by design — these are <strong>positive verification questions</strong> (e.g., "Is there a horse in the image?" → yes). This provides a clearer correctness signal.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1.5rem">Phase 2: Evaluation</h3>
+    <div class="pipeline-steps">
+      <div class="step">
+        <div><span class="num">5</span><h4>Caption-Only QA</h4></div>
+        <p>An LLM (Claude-3.5 Sonnet) answers every question using <strong>only the candidate caption</strong> — no access to the image. Options: yes / no / n/a (when the caption lacks sufficient information). This is the key "reversed" insight from DPG-Bench.</p>
+      </div>
+      <div class="step">
+        <div><span class="num">6</span><h4>Consensus via 3× Sampling</h4></div>
+        <p>To handle LLM stochasticity, each question is answered 3 times per caption. The majority vote becomes the final answer. This is explicitly stated in Section 7 and is critical for reproducibility.</p>
+      </div>
+      <div class="step">
+        <div><span class="num">7</span><h4>Accuracy Scoring</h4></div>
+        <p>Caption answers are compared with reference answers. Accuracy is computed per category and as a combined score. PG Captioner scored 72.19%, Claude-3.5 Sonnet 71.78%, GPT-4o 70.66%.</p>
+      </div>
+      <div class="step">
+        <div><span class="num">8</span><h4>Weakness Analysis</h4></div>
+        <p>The benchmark reveals specific weaknesses across all models: entity shape descriptions ("rectangular table"), entity size ("appears big"), and visual artifacts (noise/lens flare) are poorly captured. Caption length does <strong>not</strong> strongly correlate with score.</p>
+      </div>
+    </div>
+
+    <!-- Key Insight Box -->
+    <div class="detail-box" style="margin-top:1.5rem;background:#ebf8ff;border-color:#90cdf4;">
+      <h4>💡 The "Reversed" Insight</h4>
+      <p>CapsBench reverses the direction of DPG-Bench. DPG-Bench: text prompt → generate image → ask VQA questions about the image. CapsBench: look at image → generate QA pairs from image → evaluate if a <strong>caption</strong> (not the image) can answer them correctly. If the caption lacks information needed to answer "yes" to a question the image would answer "yes" to → the caption is incomplete. This is a direct faithfulness and completeness check.</p>
+    </div>
+
+    <!-- Example from paper -->
+    <div class="detail-box" style="margin-top:0.8rem;">
+      <h4>📋 Concrete Example (from PGv3 Table 8)</h4>
+      <p><strong>Image</strong>: Seven knights on horseback at a medieval reenactment.<br>
+      <strong>Question</strong>: "Is the cape of the right-most knight emerald green?"<br>
+      <strong>Ground Truth</strong>: Yes<br>
+      <strong>PG Captioner</strong>: No (described stripes instead of solid green) → penalized<br>
+      <strong>Claude-3.5</strong>: N/A (described knights as a group, missed individual capes) → also penalized</p>
+      <div class="code-block" style="margin-top:0.5rem">
+<span class="comment"># How a single data point works</span>
+{<br>
+  <span class="highlight">"image"</span>: "medieval_reenactment_001.jpg",<br>
+  <span class="highlight">"category"</span>: "color",<br>
+  <span class="highlight">"question"</span>: "Is the cape of the right-most knight emerald green?",<br>
+  <span class="highlight">"answer"</span>: "yes",  <span class="comment"># determined from image</span><br>
+  <span class="highlight">"caption_answer_pg"</span>: "no",<br>
+  <span class="highlight">"caption_answer_claude"</span>: "n/a",<br>
+  <span class="highlight">"caption_answer_gpt4o"</span>: "n/a"<br>
+}
+      </div>
+    </div>
+  </div>
+
   <!-- Paper Grid -->
-  <h2 class="section-title">Recent Papers</h2>
+  <h2 class="section-title">Other Recent Papers</h2>
   <div class="grid">
 
     <!-- ITIScore -->
@@ -296,23 +465,68 @@
 
   </div>
 
-  <!-- Predecessor: DPG-Bench -->
+  <!-- Predecessors: DPG-Bench + DPG-Bench Hard -->
   <div class="predecessor">
-    <h3>DPG-Bench (Dense Prompt Graph Benchmark) <span style="font-size:0.8rem;font-weight:400;color:var(--muted);">· Predecessor</span></h3>
+    <h3>DPG-Bench <span style="font-size:0.8rem;font-weight:400;color:var(--muted);">· Dense Prompt Graph Benchmark</span></h3>
     <div class="sub">Xiwei Hu, Rui Wang, Yixiao Fang, Bin Fu, Pei Cheng, Gang Yu · arXiv:2403.05135 · TencentQQGYLab · Mar 2024</div>
     <p style="font-size:0.9rem;">
-      DPG-Bench evaluates text-to-image alignment with <strong>1,065 dense, complex prompts</strong> that contain multiple objects, diverse attributes, and spatial relationships. It served as the primary prompt-following benchmark for the ELLA model and was referenced in Playground v3's evaluation section as a "reverse implementation" that CapsBench builds upon conceptually. While DPG-Bench focuses on <em>prompt following</em> (did the image match the text?), CapsBench focuses on <em>caption quality</em> (did the caption fully describe the image?). Together they form a complementary evaluation ecosystem for text-to-image generation and captioning.
+      DPG-Bench evaluates text-to-image alignment with <strong>1,065 dense, complex prompts</strong> containing multiple objects, attributes, and relationships. The pipeline: (i) collect prompts from COCO, PartiPrompts, DSG-1k, and Object365; (ii) use GPT-4 to expand them into long dense prompts; (iii) follow the DSG pipeline to generate tuple categories, yes-no questions, and dependency graphs; (iv) generate 4 images per prompt with each model; (v) use mPLUG-large as VQA adjudicator to answer questions about the images; (vi) compute the "graph score" based on DSG rules (aggregate accuracy per category). Categories span 5 level-1 (Global, Entity, Attribute, Relation, Other) and 13 level-2 (Color, Texture, Shape, Size, Spatial, Non-Spatial, Count, Text, etc.).
     </p>
-    <div class="rel">
-      <strong>↔ Relationship to CapsBench.</strong> DPG-Bench is the predecessor that inspired the evaluation philosophy behind CapsBench. The Playground v3 paper uses both: DPG-Bench for evaluating the text-to-image model's prompt adherence, and CapsBench for evaluating the captioner's descriptive coverage. The user described DPG-Bench as CapsBench's "reverse implementation" — DPG-Bench tests text→image alignment, while CapsBench tests image→caption coverage. Both are necessary for a complete evaluation loop.
+
+    <div style="margin-top:1rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div style="background:#fff;border-radius:8px;padding:0.8rem;border:1px solid var(--border);font-size:0.85rem;">
+        <strong style="color:#2b6cb0">DPG-Bench (original)</strong><br>
+        Text prompt → Generate image →<br>
+        mPLUG-large VQA on image →<br>
+        Graph score per DSG rules<br>
+        <span style="color:var(--muted);font-size:0.78rem;">Focus: text-to-image alignment</span>
+      </div>
+      <div style="background:#fff;border-radius:8px;padding:0.8rem;border:1px solid var(--border);font-size:0.85rem;">
+        <strong style="color:#2b6cb0">DPG-Bench Hard (PGv3 §6.2.2)</strong><br>
+        2,400 images from 120 clusters →<br>
+        GPT-4o captions + QA generation →<br>
+        GPT-4o VQA evaluator → accuracy<br>
+        <span style="color:var(--muted);font-size:0.78rem;">Focus: harder prompt-following eval</span>
+      </div>
     </div>
+
+    <div class="rel">
+      <strong>↔ Relationship to CapsBench.</strong> CapsBench is explicitly described as a <strong>"reversed approach"</strong> inspired by DSG and DPG-Bench. The key reversal: DPG-Bench tests whether a <em>generated image</em> satisfies conditions from a <em>text prompt</em>; CapsBench tests whether a <em>generated caption</em> captures details present in the <em>source image</em>. Both use the same core mechanism — structured yes-no QA verification — but flipped in direction. The DPG-Bench Hard construction process (GPT-4o captions → questions → LLM evaluation) directly parallels how CapsBench was built, just applied to captioning instead of image generation.
+    </div>
+  </div>
+
+  <!-- Comparison Table -->
+  <div style="margin-top:2rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;overflow-x:auto;">
+    <h3 style="font-size:1.1rem;margin-bottom:0.8rem;">Quick Comparison</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border);">
+          <th style="text-align:left;padding:0.5rem 0.6rem;">Metric</th>
+          <th style="text-align:left;padding:0.5rem 0.6rem;">Reference</th>
+          <th style="text-align:left;padding:0.5rem 0.6rem;">Granularity</th>
+          <th style="text-align:left;padding:0.5rem 0.6rem;">Paradigm</th>
+          <th style="text-align:left;padding:0.5rem 0.6rem;">Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.6rem;"><strong>CapsBench</strong></td><td style="padding:0.4rem 0.6rem;">Free</td><td style="padding:0.4rem 0.6rem;">Question-level (17 cats)</td><td style="padding:0.4rem 0.6rem;">QA verification (LLM)</td><td style="padding:0.4rem 0.6rem;">2024</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.6rem;"><strong>DPG-Bench</strong></td><td style="padding:0.4rem 0.6rem;">N/A (T2I)</td><td style="padding:0.4rem 0.6rem;">Question-level (13 cats)</td><td style="padding:0.4rem 0.6rem;">VQA on generated image</td><td style="padding:0.4rem 0.6rem;">2024</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.6rem;"><strong>ITIScore</strong></td><td style="padding:0.4rem 0.6rem;">Free</td><td style="padding:0.4rem 0.6rem;">Image-level</td><td style="padding:0.4rem 0.6rem;">Reconstruction loop</td><td style="padding:0.4rem 0.6rem;">2026</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.6rem;"><strong>VQAScore v2</strong></td><td style="padding:0.4rem 0.6rem;">Free</td><td style="padding:0.4rem 0.6rem;">Question-level (learned weights)</td><td style="padding:0.4rem 0.6rem;">Binary QA aggregation</td><td style="padding:0.4rem 0.6rem;">2025</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.6rem;"><strong>VIEScore</strong></td><td style="padding:0.4rem 0.6rem;">Free</td><td style="padding:0.4rem 0.6rem;">Likert (1-5)</td><td style="padding:0.4rem 0.6rem;">Learned regression</td><td style="padding:0.4rem 0.6rem;">2026</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.6rem;"><strong>GenEval</strong></td><td style="padding:0.4rem 0.6rem;">Free</td><td style="padding:0.4rem 0.6rem;">Rank + compare</td><td style="padding:0.4rem 0.6rem;">LLM-as-judge</td><td style="padding:0.4rem 0.6rem;">2025</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.4rem 0.6rem;"><strong>LLaVA-Critic</strong></td><td style="padding:0.4rem 0.6rem;">Free</td><td style="padding:0.4rem 0.6rem;">Score + critique text</td><td style="padding:0.4rem 0.6rem;">Fine-tuned VLM critic</td><td style="padding:0.4rem 0.6rem;">2025</td></tr>
+        <tr><td style="padding:0.4rem 0.6rem;"><strong>PAC-S++</strong></td><td style="padding:0.4rem 0.6rem;">Free</td><td style="padding:0.4rem 0.6rem;">Continuous score</td><td style="padding:0.4rem 0.6rem;">Siamese transformer</td><td style="padding:0.4rem 0.6rem;">2025</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <footer>
     <p>
       <a href="https://arxiv.org/abs/2409.10695">Playground v3</a> ·
       <a href="https://arxiv.org/abs/2403.05135">ELLA / DPG-Bench</a> ·
-      <a href="https://arxiv.org/abs/2604.03765">ITIScore</a><br>
+      <a href="https://arxiv.org/abs/2604.03765">ITIScore</a> ·
+      <a href="https://huggingface.co/datasets/playgroundai/CapsBench">CapsBench Dataset</a><br>
       Built as a personal survey. Corrections &amp; additions welcome.
     </p>
   </footer>
