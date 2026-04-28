@@ -314,7 +314,7 @@
       </div>
       <div class="step">
         <div><span class="num">2</span><h4>QA Pair Generation</h4></div>
-        <p>For each image, yes-no question-answer pairs are generated "based on the image" (Sec. 4.2, verbatim). Unlike DPG-Bench — where questions are derived from text prompts — CapsBench derives questions from the <strong>image content</strong>. The exact mechanism (VLM-based or human-in-the-loop) is not specified, but the DPG-Bench Hard section states its GPT-4o-based process "parallels how we constructed CapsBench." ~12 questions per image, 2,471 total.</p>
+        <p>⚠️ <strong>Ambiguity in the paper.</strong> Sec. 4.2 says "Based on the image, we generate QA pairs." However, Sec. 6.2.2 says DPG-Bench Hard used GPT-4o captions → questions and "this process parallels how we constructed our CapsBench." Two readings: (A) directly from the image via VLM; (B) via an intermediate caption (parallel to DPG-Bench Hard). The paper does not disambiguate. ~12 questions per image, 2,471 total.</p>
       </div>
       <div class="step">
         <div><span class="num">3</span><h4>17-Category Taxonomy</h4></div>
