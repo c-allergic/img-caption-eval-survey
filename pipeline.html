@@ -4,195 +4,182 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CapsBench Pipeline</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'JetBrains Mono',monospace;background:#020617;min-height:100vh;padding:2rem;color:white}
+body{font-family:'Inter','Segoe UI',sans-serif;background:#f8f9fa;min-height:100vh;padding:2rem;color:#212529}
 .container{max-width:1200px;margin:0 auto}
-.header{margin-bottom:2rem}
-.header-row{display:flex;align-items:center;gap:1rem;margin-bottom:.5rem}
-.pulse-dot{width:12px;height:12px;background:#22d3ee;border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-h1{font-size:1.5rem;font-weight:700;letter-spacing:-.025em}
-.subtitle{color:#94a3b8;font-size:.875rem;margin-left:1.75rem}
-.diagram-container{background:rgba(15,23,42,.5);border-radius:1rem;border:1px solid #1e293b;padding:1.5rem;overflow-x:auto}
+.header{margin-bottom:1.5rem}
+h1{font-size:1.4rem;font-weight:700;color:#212529;letter-spacing:-.01em}
+.subtitle{color:#6c757d;font-size:.85rem;margin-top:.25rem}
+.diagram-container{background:#fff;border-radius:.75rem;border:1px solid #dee2e6;padding:1.5rem;overflow-x:auto;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 svg{width:100%;min-width:1100px;display:block}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:2rem}
-.card{background:rgba(15,23,42,.5);border-radius:.75rem;border:1px solid #1e293b;padding:1.25rem}
-.card-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
-.card-dot{width:8px;height:8px;border-radius:50%}
-.card-dot.cyan{background:#22d3ee}
-.card-dot.emerald{background:#34d399}
-.card-dot.violet{background:#a78bfa}
-.card-dot.amber{background:#fbbf24}
-.card-dot.rose{background:#fb7185}
-.card h3{font-size:.875rem;font-weight:600}
-.card ul{list-style:none;color:#94a3b8;font-size:.75rem}
-.card li{margin-bottom:.375rem}
-.footer{text-align:center;margin-top:1.5rem;color:#475569;font-size:.75rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.5rem}
+.card{background:#fff;border-radius:.5rem;border:1px solid #dee2e6;padding:1.1rem 1.25rem}
+.card h3{font-size:.8rem;font-weight:600;color:#495057;margin-bottom:.6rem}
+.card h3 span{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.5rem}
+.card ul{list-style:none;color:#6c757d;font-size:.75rem;line-height:1.7}
+.footer{text-align:center;margin-top:1.5rem;color:#adb5bd;font-size:.7rem}
 </style>
 </head>
 <body>
 <div class="container">
   <div class="header">
-    <div class="header-row">
-      <div class="pulse-dot"></div>
-      <h1>CapsBench Evaluation Pipeline</h1>
-    </div>
-    <p class="subtitle">200 images · 2,471 yes-no questions · 17 evaluation categories</p>
+    <h1>CapsBench Evaluation Pipeline</h1>
+    <div class="subtitle">200 images · 2,471 yes-no questions · 17 evaluation categories</div>
   </div>
 
   <div class="diagram-container">
-    <svg viewBox="0 0 1200 850">
+    <svg viewBox="0 0 1180 820">
       <defs>
-        <marker id="arw" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-          <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+        <marker id="arw" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#adb5bd"/>
         </marker>
-        <marker id="arw-b" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-          <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+        <marker id="arw-b" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#4361ee"/>
         </marker>
-        <marker id="arw-g" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-          <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+        <marker id="arw-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#2ec4b6"/>
         </marker>
-        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
-        </pattern>
       </defs>
 
-      <rect width="100%" height="100%" fill="url(#grid)"/>
+      <rect width="100%" height="100%" fill="#fafafa"/>
+
+      <!-- ============ TITLE ============ -->
+      <text x="590" y="28" fill="#212529" font-size="11" font-weight="700" text-anchor="middle" font-family="Inter,sans-serif">CapsBench Evaluation Pipeline</text>
+      <text x="590" y="44" fill="#6c757d" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">200 images · 2,471 yes-no questions · 17 categories</text>
 
       <!-- ============ LEGEND ============ -->
-      <rect x="960" y="40" width="210" height="180" rx="6" fill="rgba(15,23,42,0.85)" stroke="#475569" stroke-width="1"/>
-      <text x="975" y="60" fill="white" font-size="10" font-weight="600">Legend</text>
-      <rect x="975" y="72" width="14" height="10" rx="2" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1"/><text x="997" y="81" fill="#94a3b8" font-size="8">Pipeline Step</text>
-      <rect x="975" y="90" width="14" height="10" rx="2" fill="rgba(120,53,15,0.25)" stroke="#fbbf24" stroke-width="1"/><text x="997" y="99" fill="#94a3b8" font-size="8">Action / Processing</text>
-      <rect x="975" y="108" width="14" height="10" rx="2" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1"/><text x="997" y="117" fill="#94a3b8" font-size="8">Meta / Control</text>
-      <rect x="975" y="126" width="14" height="10" rx="2" fill="rgba(6,78,59,0.35)" stroke="#34d399" stroke-width="1"/><text x="997" y="135" fill="#94a3b8" font-size="8">Output / Result</text>
-      <rect x="975" y="144" width="14" height="10" rx="2" fill="rgba(136,19,55,0.2)" stroke="#fb7185" stroke-width="1"/><text x="997" y="153" fill="#94a3b8" font-size="8">Ambiguity / Note</text>
-      <rect x="975" y="162" width="14" height="10" rx="2" fill="transparent" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/><text x="997" y="171" fill="#94a3b8" font-size="8">Boundary</text>
-      <line x1="975" y1="184" x2="989" y2="184" stroke="#64748b" stroke-width="1" marker-end="url(#arw)"/><text x="997" y="188" fill="#94a3b8" font-size="8">Data Flow</text>
+      <rect x="960" y="55" width="200" height="200" rx="4" fill="white" stroke="#dee2e6" stroke-width="1"/>
+      <text x="975" y="75" fill="#212529" font-size="9" font-weight="600" font-family="Inter,sans-serif">Legend</text>
+      <rect x="975" y="88" width="14" height="8" rx="2" fill="white" stroke="#4361ee" stroke-width="1.2"/><text x="997" y="96" fill="#6c757d" font-size="7" font-family="Inter,sans-serif">Pipeline Step</text>
+      <rect x="975" y="106" width="14" height="8" rx="2" fill="white" stroke="#e85d04" stroke-width="1.2"/><text x="997" y="114" fill="#6c757d" font-size="7" font-family="Inter,sans-serif">Processing / Action</text>
+      <rect x="975" y="124" width="14" height="8" rx="2" fill="white" stroke="#5a189a" stroke-width="1.2"/><text x="997" y="132" fill="#6c757d" font-size="7" font-family="Inter,sans-serif">Meta / Control</text>
+      <rect x="975" y="142" width="14" height="8" rx="2" fill="white" stroke="#2ec4b6" stroke-width="1.2"/><text x="997" y="150" fill="#6c757d" font-size="7" font-family="Inter,sans-serif">Output / Result</text>
+      <rect x="975" y="160" width="14" height="8" rx="2" fill="#fff5f5" stroke="#e63946" stroke-width="1.2"/><text x="997" y="168" fill="#6c757d" font-size="7" font-family="Inter,sans-serif">Note / Ambiguity</text>
+      <rect x="975" y="178" width="14" height="8" rx="2" fill="transparent" stroke="#adb5bd" stroke-width="1" stroke-dasharray="3,3"/><text x="997" y="186" fill="#6c757d" font-size="7" font-family="Inter,sans-serif">Phase Boundary</text>
+      <line x1="975" y1="200" x2="989" y2="200" stroke="#adb5bd" stroke-width="1.2" marker-end="url(#arw)"/><text x="997" y="204" fill="#6c757d" font-size="7" font-family="Inter,sans-serif">Data Flow</text>
 
       <!-- ============================= PHASE 1 ============================= -->
-      <rect x="20" y="40" width="920" height="310" rx="12" fill="rgba(8,51,68,0.08)" stroke="#22d3ee" stroke-width="1" stroke-dasharray="8,4"/>
-      <text x="34" y="60" fill="#22d3ee" font-size="11" font-weight="600">Phase 1: Benchmark Construction</text>
+      <rect x="30" y="60" width="910" height="310" rx="6" fill="white" stroke="#4361ee" stroke-width="1" stroke-dasharray="6,4" stroke-opacity="0.5"/>
+      <rect x="30" y="60" width="910" height="22" rx="6" fill="#4361ee" fill-opacity="0.06"/>
+      <text x="45" y="75" fill="#4361ee" font-size="9" font-weight="700" font-family="Inter,sans-serif">Phase 1 · Benchmark Construction</text>
 
       <!-- Step 1 -->
-      <rect x="50" y="85" width="200" height="75" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
-      <text x="150" y="111" fill="white" font-size="12" font-weight="600" text-anchor="middle">① Image Collection</text>
-      <text x="150" y="129" fill="#94a3b8" font-size="9" text-anchor="middle">200 images</text>
-      <text x="150" y="145" fill="#94a3b8" font-size="9" text-anchor="middle">9 diverse types*</text>
-      <line x1="250" y1="122" x2="310" y2="122" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arw-b)"/>
+      <rect x="55" y="100" width="190" height="72" rx="4" fill="white" stroke="#4361ee" stroke-width="1.2"/>
+      <text x="150" y="125" fill="#212529" font-size="10" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">① Image Collection</text>
+      <text x="150" y="143" fill="#6c757d" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">200 images</text>
+      <text x="150" y="158" fill="#6c757d" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">9 diverse types</text>
+      <line x1="245" y1="136" x2="305" y2="136" stroke="#4361ee" stroke-width="1.2" marker-end="url(#arw-b)"/>
 
       <!-- Step 2 -->
-      <rect x="320" y="80" width="280" height="85" rx="6" fill="rgba(120,53,15,0.25)" stroke="#fbbf24" stroke-width="1.5"/>
-      <text x="460" y="105" fill="white" font-size="12" font-weight="600" text-anchor="middle">② QA Pair Generation</text>
-      <text x="460" y="123" fill="#fbbf24" font-size="8" text-anchor="middle">"Based on the image" — Sec 4.2</text>
-      <text x="460" y="140" fill="#94a3b8" font-size="8" text-anchor="middle">~12 questions/image · 2,471 total</text>
-      <text x="460" y="155" fill="#94a3b8" font-size="7" text-anchor="middle">Yes/No · Most answers are "yes"</text>
-      <line x1="600" y1="122" x2="660" y2="122" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arw-b)"/>
+      <rect x="315" y="95" width="270" height="82" rx="4" fill="white" stroke="#e85d04" stroke-width="1.2"/>
+      <text x="450" y="120" fill="#212529" font-size="10" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">② QA Pair Generation</text>
+      <text x="450" y="137" fill="#e85d04" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">"Based on the image" — Sec 4.2</text>
+      <text x="450" y="153" fill="#6c757d" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">~12 questions/image · 2,471 total</text>
+      <text x="450" y="168" fill="#adb5bd" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">Yes/No · Most answers are "yes"</text>
+      <line x1="585" y1="136" x2="645" y2="136" stroke="#4361ee" stroke-width="1.2" marker-end="url(#arw-b)"/>
 
       <!-- Step 3 -->
-      <rect x="670" y="85" width="220" height="75" rx="6" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="780" y="111" fill="white" font-size="12" font-weight="600" text-anchor="middle">③ 17-Category Tagging</text>
-      <text x="780" y="129" fill="#a78bfa" font-size="9" text-anchor="middle">per question</text>
-      <text x="780" y="145" fill="#94a3b8" font-size="8" text-anchor="middle">General · Color · Entity · ...</text>
+      <rect x="655" y="100" width="220" height="72" rx="4" fill="white" stroke="#5a189a" stroke-width="1.2"/>
+      <text x="765" y="125" fill="#212529" font-size="10" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">③ Category Tagging</text>
+      <text x="765" y="143" fill="#5a189a" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">17 categories per question</text>
+      <text x="765" y="158" fill="#adb5bd" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">General · Color · Entity · ...</text>
 
       <!-- Ambiguity -->
-      <rect x="50" y="185" width="820" height="55" rx="6" fill="rgba(136,19,55,0.15)" stroke="#fb7185" stroke-width="1"/>
-      <text x="65" y="203" fill="#fb7185" font-size="10" font-weight="600">⚠ Ambiguity: How are QA pairs generated?</text>
-      <text x="65" y="220" fill="#94a3b8" font-size="8">Reading A: VLM looks at image directly (supported by "Based on the image" — Sec 4.2)</text>
-      <text x="65" y="234" fill="#94a3b8" font-size="8">Reading B: Caption → QA like DPG-Bench Hard (supported by "parallels how we constructed CapsBench")</text>
+      <rect x="55" y="195" width="860" height="52" rx="4" fill="#fff5f5" stroke="#e63946" stroke-width="1"/>
+      <text x="70" y="212" fill="#e63946" font-size="9" font-weight="600" font-family="Inter,sans-serif">Ambiguity: How are QA pairs generated?</text>
+      <text x="70" y="228" fill="#495057" font-size="7.5" font-family="Inter,sans-serif">Reading A: VLM directly looks at image ("Based on the image" — Sec 4.2)</text>
+      <text x="70" y="241" fill="#495057" font-size="7.5" font-family="Inter,sans-serif">Reading B: Caption → QA like DPG-Bench Hard ("parallels how we constructed CapsBench")</text>
 
-      <!-- Category tags -->
-      <text x="50" y="270" fill="#a78bfa" font-size="10" font-weight="600">17 Evaluation Categories:</text>
-      <g font-size="8" fill="#94a3b8" text-anchor="middle">
-        <rect x="50" y="282" width="80" height="20" rx="3" fill="rgba(8,51,68,0.3)" stroke="#22d3ee" stroke-width="0.5"/><text x="90" y="296" fill="#22d3ee" font-size="7">General</text>
-        <rect x="136" y="282" width="85" height="20" rx="3" fill="rgba(8,51,68,0.3)" stroke="#22d3ee" stroke-width="0.5"/><text x="178" y="296" fill="#22d3ee" font-size="7">Image Type</text>
-        <rect x="227" y="282" width="70" height="20" rx="3" fill="rgba(8,51,68,0.3)" stroke="#22d3ee" stroke-width="0.5"/><text x="262" y="296" fill="#22d3ee" font-size="7">Text</text>
-        <rect x="303" y="282" width="70" height="20" rx="3" fill="rgba(8,51,68,0.3)" stroke="#22d3ee" stroke-width="0.5"/><text x="338" y="296" fill="#22d3ee" font-size="7">Color</text>
-        <rect x="379" y="282" width="75" height="20" rx="3" fill="rgba(8,51,68,0.3)" stroke="#22d3ee" stroke-width="0.5"/><text x="416" y="296" fill="#22d3ee" font-size="7">Position</text>
-        <rect x="460" y="282" width="75" height="20" rx="3" fill="rgba(8,51,68,0.3)" stroke="#22d3ee" stroke-width="0.5"/><text x="497" y="296" fill="#22d3ee" font-size="7">Relation</text>
-        <rect x="541" y="282" width="95" height="20" rx="3" fill="rgba(8,51,68,0.3)" stroke="#22d3ee" stroke-width="0.5"/><text x="588" y="296" fill="#22d3ee" font-size="7">Rel. Position</text>
+      <!-- Categories grid -->
+      <text x="55" y="278" fill="#5a189a" font-size="9" font-weight="600" font-family="Inter,sans-serif">17 Evaluation Categories</text>
+      <g font-size="7" fill="#495057" text-anchor="middle" font-family="Inter,sans-serif">
+        <rect x="55" y="290" width="68" height="20" rx="3" fill="#eef2ff" stroke="#4361ee" stroke-width="0.6"/><text x="89" y="304" fill="#4361ee" font-size="6.5">General</text>
+        <rect x="129" y="290" width="72" height="20" rx="3" fill="#eef2ff" stroke="#4361ee" stroke-width="0.6"/><text x="165" y="304" fill="#4361ee" font-size="6.5">Image Type</text>
+        <rect x="207" y="290" width="58" height="20" rx="3" fill="#eef2ff" stroke="#4361ee" stroke-width="0.6"/><text x="236" y="304" fill="#4361ee" font-size="6.5">Text</text>
+        <rect x="271" y="290" width="58" height="20" rx="3" fill="#eef2ff" stroke="#4361ee" stroke-width="0.6"/><text x="300" y="304" fill="#4361ee" font-size="6.5">Color</text>
+        <rect x="335" y="290" width="64" height="20" rx="3" fill="#eef2ff" stroke="#4361ee" stroke-width="0.6"/><text x="367" y="304" fill="#4361ee" font-size="6.5">Position</text>
+        <rect x="405" y="290" width="64" height="20" rx="3" fill="#eef2ff" stroke="#4361ee" stroke-width="0.6"/><text x="437" y="304" fill="#4361ee" font-size="6.5">Relation</text>
+        <rect x="475" y="290" width="80" height="20" rx="3" fill="#eef2ff" stroke="#4361ee" stroke-width="0.6"/><text x="515" y="304" fill="#4361ee" font-size="6.5">Rel. Position</text>
 
-        <rect x="642" y="282" width="62" height="20" rx="3" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="0.5"/><text x="673" y="296" fill="#34d399" font-size="7">Entity</text>
-        <rect x="710" y="282" width="78" height="20" rx="3" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="0.5"/><text x="749" y="296" fill="#34d399" font-size="7">Entity Size</text>
-        <rect x="794" y="282" width="82" height="20" rx="3" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="0.5"/><text x="835" y="296" fill="#34d399" font-size="7">Entity Shape</text>
+        <rect x="561" y="290" width="65" height="20" rx="3" fill="#ecfdf5" stroke="#2ec4b6" stroke-width="0.6"/><text x="593" y="304" fill="#2ec4b6" font-size="6.5">Entity</text>
+        <rect x="632" y="290" width="72" height="20" rx="3" fill="#ecfdf5" stroke="#2ec4b6" stroke-width="0.6"/><text x="668" y="304" fill="#2ec4b6" font-size="6.5">Entity Size</text>
+        <rect x="710" y="290" width="78" height="20" rx="3" fill="#ecfdf5" stroke="#2ec4b6" stroke-width="0.6"/><text x="749" y="304" fill="#2ec4b6" font-size="6.5">Entity Shape</text>
 
-        <rect x="50" y="308" width="62" height="20" rx="3" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="0.5"/><text x="81" y="322" fill="#34d399" font-size="7">Count</text>
-        <rect x="118" y="308" width="68" height="20" rx="3" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="0.5"/><text x="152" y="322" fill="#34d399" font-size="7">Emotion</text>
-        <rect x="192" y="308" width="58" height="20" rx="3" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="0.5"/><text x="221" y="322" fill="#fb7185" font-size="7">Blur</text>
-        <rect x="256" y="308" width="90" height="20" rx="3" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="0.5"/><text x="301" y="322" fill="#fb7185" font-size="7">Artifacts</text>
-        <rect x="352" y="308" width="85" height="20" rx="3" fill="rgba(251,146,60,0.2)" stroke="#fb923c" stroke-width="0.5"/><text x="394" y="322" fill="#fb923c" font-size="7">Proper Noun</text>
-        <rect x="443" y="308" width="95" height="20" rx="3" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="0.5"/><text x="490" y="322" fill="#a78bfa" font-size="7">Color Palette</text>
-        <rect x="544" y="308" width="95" height="20" rx="3" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="0.5"/><text x="591" y="322" fill="#a78bfa" font-size="7">Color Grading</text>
+        <rect x="55" y="316" width="58" height="20" rx="3" fill="#ecfdf5" stroke="#2ec4b6" stroke-width="0.6"/><text x="84" y="330" fill="#2ec4b6" font-size="6.5">Count</text>
+        <rect x="119" y="316" width="62" height="20" rx="3" fill="#ecfdf5" stroke="#2ec4b6" stroke-width="0.6"/><text x="150" y="330" fill="#2ec4b6" font-size="6.5">Emotion</text>
+        <rect x="187" y="316" width="56" height="20" rx="3" fill="#fef2f2" stroke="#e63946" stroke-width="0.6"/><text x="215" y="330" fill="#e63946" font-size="6.5">Blur</text>
+        <rect x="249" y="316" width="78" height="20" rx="3" fill="#fef2f2" stroke="#e63946" stroke-width="0.6"/><text x="288" y="330" fill="#e63946" font-size="6.5">Artifacts</text>
+        <rect x="333" y="316" width="78" height="20" rx="3" fill="#fff7ed" stroke="#e85d04" stroke-width="0.6"/><text x="372" y="330" fill="#e85d04" font-size="6.5">Proper Noun</text>
+        <rect x="417" y="316" width="80" height="20" rx="3" fill="#faf5ff" stroke="#5a189a" stroke-width="0.6"/><text x="457" y="330" fill="#5a189a" font-size="6.5">Color Palette</text>
+        <rect x="503" y="316" width="80" height="20" rx="3" fill="#faf5ff" stroke="#5a189a" stroke-width="0.6"/><text x="543" y="330" fill="#5a189a" font-size="6.5">Color Grading</text>
       </g>
 
-      <!-- Arrow down -->
-      <line x1="480" y1="355" x2="480" y2="390" stroke="#22d3ee" stroke-width="2" marker-end="url(#arw-b)"/>
+      <!-- Arrow to Phase 2 -->
+      <line x1="485" y1="375" x2="485" y2="405" stroke="#4361ee" stroke-width="1.5" marker-end="url(#arw-b)"/>
 
       <!-- ============================= PHASE 2 ============================= -->
-      <rect x="20" y="400" width="1150" height="270" rx="12" fill="rgba(6,78,59,0.08)" stroke="#34d399" stroke-width="1" stroke-dasharray="8,4"/>
-      <text x="34" y="420" fill="#34d399" font-size="11" font-weight="600">Phase 2: Caption Evaluation</text>
+      <rect x="30" y="415" width="950" height="260" rx="6" fill="white" stroke="#2ec4b6" stroke-width="1" stroke-dasharray="6,4" stroke-opacity="0.5"/>
+      <rect x="30" y="415" width="950" height="22" rx="6" fill="#2ec4b6" fill-opacity="0.06"/>
+      <text x="45" y="430" fill="#2ec4b6" font-size="9" font-weight="700" font-family="Inter,sans-serif">Phase 2 · Caption Evaluation</text>
 
       <!-- Step 4 -->
-      <rect x="40" y="450" width="170" height="70" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
-      <text x="125" y="477" fill="white" font-size="11" font-weight="600" text-anchor="middle">Candidate Caption</text>
-      <text x="125" y="495" fill="#94a3b8" font-size="8" text-anchor="middle">from model under test</text>
-      <text x="125" y="508" fill="#94a3b8" font-size="7" text-anchor="middle">(PG / GPT-4o / Claude)</text>
-      <line x1="210" y1="485" x2="270" y2="485" stroke="#34d399" stroke-width="1.5" marker-end="url(#arw-g)"/>
+      <rect x="50" y="460" width="150" height="65" rx="4" fill="white" stroke="#4361ee" stroke-width="1.2"/>
+      <text x="125" y="486" fill="#212529" font-size="10" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">Candidate</text>
+      <text x="125" y="500" fill="#212529" font-size="10" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">Caption</text>
+      <text x="125" y="516" fill="#adb5bd" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">PG / GPT-4o / Claude</text>
+      <line x1="200" y1="492" x2="260" y2="492" stroke="#adb5bd" stroke-width="1.2" marker-end="url(#arw)"/>
 
       <!-- Step 5 -->
-      <rect x="280" y="445" width="280" height="80" rx="6" fill="rgba(120,53,15,0.25)" stroke="#fbbf24" stroke-width="1.5"/>
-      <text x="420" y="469" fill="white" font-size="11" font-weight="600" text-anchor="middle">④ LLM Answers Questions</text>
-      <text x="420" y="487" fill="#fbbf24" font-size="8" text-anchor="middle">Claude-3.5 Sonnet</text>
-      <text x="420" y="503" fill="#94a3b8" font-size="8" text-anchor="middle">Caption only · No image access</text>
-      <text x="420" y="516" fill="#94a3b8" font-size="7" text-anchor="middle">Output: Yes / No / N/A</text>
-      <line x1="560" y1="485" x2="620" y2="485" stroke="#34d399" stroke-width="1.5" marker-end="url(#arw-g)"/>
+      <rect x="270" y="455" width="260" height="75" rx="4" fill="white" stroke="#e85d04" stroke-width="1.2"/>
+      <text x="400" y="478" fill="#212529" font-size="10" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">④ LLM Answers Questions</text>
+      <text x="400" y="495" fill="#e85d04" font-size="7.5" text-anchor="middle" font-family="Inter,sans-serif">Claude-3.5 Sonnet</text>
+      <text x="400" y="510" fill="#6c757d" font-size="7.5" text-anchor="middle" font-family="Inter,sans-serif">Caption only · No image access</text>
+      <text x="400" y="523" fill="#adb5bd" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">Output: Yes / No / N/A</text>
+      <line x1="530" y1="492" x2="590" y2="492" stroke="#adb5bd" stroke-width="1.2" marker-end="url(#arw)"/>
 
       <!-- Step 6 -->
-      <rect x="630" y="450" width="190" height="70" rx="6" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="725" y="477" fill="white" font-size="11" font-weight="600" text-anchor="middle">⑤ Consensus (3×)</text>
-      <text x="725" y="495" fill="#a78bfa" font-size="9" text-anchor="middle">Majority vote</text>
-      <text x="725" y="510" fill="#94a3b8" font-size="7" text-anchor="middle">per question</text>
-      <line x1="820" y1="485" x2="880" y2="485" stroke="#34d399" stroke-width="1.5" marker-end="url(#arw-g)"/>
+      <rect x="600" y="460" width="170" height="65" rx="4" fill="white" stroke="#5a189a" stroke-width="1.2"/>
+      <text x="685" y="486" fill="#212529" font-size="10" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">⑤ Consensus</text>
+      <text x="685" y="500" fill="#212529" font-size="10" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">(3×)</text>
+      <text x="685" y="516" fill="#adb5bd" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">Majority vote</text>
+      <line x1="770" y1="492" x2="830" y2="492" stroke="#adb5bd" stroke-width="1.2" marker-end="url(#arw)"/>
 
       <!-- Step 7 -->
-      <rect x="890" y="450" width="230" height="70" rx="6" fill="rgba(6,78,59,0.35)" stroke="#34d399" stroke-width="1.5"/>
-      <text x="1005" y="477" fill="white" font-size="11" font-weight="600" text-anchor="middle">⑥ Accuracy Score</text>
-      <text x="1005" y="495" fill="#34d399" font-size="9" text-anchor="middle">Per-category + combined</text>
-      <text x="1005" y="510" fill="#94a3b8" font-size="7" text-anchor="middle">Compare vs reference answers</text>
+      <rect x="840" y="460" width="200" height="65" rx="4" fill="white" stroke="#2ec4b6" stroke-width="1.2"/>
+      <text x="940" y="486" fill="#212529" font-size="10" font-weight="600" text-anchor="middle" font-family="Inter,sans-serif">⑥ Accuracy Score</text>
+      <text x="940" y="500" fill="#2ec4b6" font-size="8" text-anchor="middle" font-family="Inter,sans-serif">Per-category + combined</text>
+      <text x="940" y="516" fill="#adb5bd" font-size="7" text-anchor="middle" font-family="Inter,sans-serif">Compare vs reference</text>
 
       <!-- Results -->
-      <rect x="40" y="550" width="1100" height="100" rx="8" fill="transparent" stroke="#64748b" stroke-width="1" stroke-dasharray="4,4"/>
-      <text x="54" y="570" fill="white" font-size="10" font-weight="600">Results (Claude-3.5 Sonnet as judge — Section 7)</text>
+      <rect x="50" y="555" width="900" height="95" rx="4" fill="white" stroke="#adb5bd" stroke-width="1" stroke-dasharray="4,4"/>
+      <text x="65" y="572" fill="#212529" font-size="9" font-weight="600" font-family="Inter,sans-serif">Results (Claude-3.5 Sonnet as judge — Section 7)</text>
 
-      <rect x="100" y="585" width="260" height="40" rx="6" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="1.5"/>
-      <text x="230" y="604" fill="#34d399" font-size="11" font-weight="600" text-anchor="middle">PG Captioner: 72.19%</text>
-      <text x="230" y="617" fill="#94a3b8" font-size="7" text-anchor="middle">PGv3 in-house captioner</text>
+      <rect x="90" y="585" width="220" height="38" rx="4" fill="#ecfdf5" stroke="#2ec4b6" stroke-width="1"/>
+      <text x="200" y="603" fill="#2ec4b6" font-size="10" font-weight="700" text-anchor="middle" font-family="Inter,sans-serif">PG Captioner: 72.19%</text>
+      <text x="200" y="615" fill="#6c757d" font-size="6.5" text-anchor="middle" font-family="Inter,sans-serif">PGv3 in-house captioner</text>
 
-      <rect x="440" y="585" width="260" height="40" rx="6" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="570" y="604" fill="#a78bfa" font-size="11" font-weight="600" text-anchor="middle">Claude-3.5 Sonnet: 71.78%</text>
-      <text x="570" y="617" fill="#94a3b8" font-size="7" text-anchor="middle">Best proprietary VLM</text>
+      <rect x="370" y="585" width="220" height="38" rx="4" fill="#faf5ff" stroke="#5a189a" stroke-width="1"/>
+      <text x="480" y="603" fill="#5a189a" font-size="10" font-weight="700" text-anchor="middle" font-family="Inter,sans-serif">Claude-3.5: 71.78%</text>
+      <text x="480" y="615" fill="#6c757d" font-size="6.5" text-anchor="middle" font-family="Inter,sans-serif">Best proprietary VLM</text>
 
-      <rect x="780" y="585" width="260" height="40" rx="6" fill="rgba(251,146,60,0.2)" stroke="#fb923c" stroke-width="1.5"/>
-      <text x="910" y="604" fill="#fb923c" font-size="11" font-weight="600" text-anchor="middle">GPT-4o: 70.66%</text>
-      <text x="910" y="617" fill="#94a3b8" font-size="7" text-anchor="middle">OpenAI multimodal</text>
+      <rect x="650" y="585" width="220" height="38" rx="4" fill="#fff7ed" stroke="#e85d04" stroke-width="1"/>
+      <text x="760" y="603" fill="#e85d04" font-size="10" font-weight="700" text-anchor="middle" font-family="Inter,sans-serif">GPT-4o: 70.66%</text>
+      <text x="760" y="615" fill="#6c757d" font-size="6.5" text-anchor="middle" font-family="Inter,sans-serif">OpenAI multimodal</text>
 
-      <text x="60" y="642" fill="#94a3b8" font-size="8">Weaknesses: entity shape, entity size, visual artifacts — all models perform poorly. Caption length does NOT strongly correlate with CapsBench score.</text>
+      <text x="65" y="641" fill="#6c757d" font-size="7.5" font-family="Inter,sans-serif">Weaknesses: entity shape, entity size, visual artifacts — poorly captured by all models. Caption length ≠ score.</text>
 
       <!-- Footer -->
-      <text x="40" y="720" fill="#475569" font-size="7">* Image types: film scenes, cartoon scenes, movie posters, invitations, ads, casual/street/landscape/interior photography</text>
-      <text x="40" y="734" fill="#475569" font-size="7">Inspired by DSG (Davidsonian Scene Graph) and DPG-Bench. "Reversed" approach: caption evaluation instead of image evaluation.</text>
-      <text x="40" y="760" fill="#475569" font-size="7">Source: Playground v3 — arXiv:2409.10695 · Dataset: huggingface.co/datasets/playgroundai/CapsBench</text>
+      <text x="30" y="720" fill="#adb5bd" font-size="6.5" font-family="Inter,sans-serif">* Image types: film scenes, cartoon scenes, movie posters, invitations, ads, casual/street/landscape/interior photography</text>
+      <text x="30" y="734" fill="#adb5bd" font-size="6.5" font-family="Inter,sans-serif">Inspired by DSG and DPG-Bench. "Reversed": caption evaluation instead of image evaluation.</text>
+      <text x="30" y="748" fill="#adb5bd" font-size="6.5" font-family="Inter,sans-serif">Source: Playground v3 — arXiv:2409.10695 · Dataset: huggingface.co/datasets/playgroundai/CapsBench</text>
     </svg>
   </div>
 
   <div class="cards">
     <div class="card">
-      <div class="card-header">
-        <div class="card-dot cyan"></div>
-        <h3>Core Dataset</h3>
-      </div>
+      <h3><span style="background:#4361ee"></span>Core Dataset</h3>
       <ul>
         <li>• 200 hand-curated images</li>
         <li>• 2,471 yes-no question pairs</li>
@@ -201,25 +188,17 @@ svg{width:100%;min-width:1100px;display:block}
         <li>• 9 visual domains covered</li>
       </ul>
     </div>
-
     <div class="card">
-      <div class="card-header">
-        <div class="card-dot amber"></div>
-        <h3>Relation to DPG-Bench</h3>
-      </div>
+      <h3><span style="background:#e85d04"></span>Relation to DPG-Bench</h3>
       <ul>
         <li>• DPG-Bench: text prompt → image → VQA</li>
         <li>• CapsBench (reversed): image → caption → QA</li>
         <li>• DPG-Bench Hard: GPT-4o caption → QA</li>
-        <li>• Both: "parallels how we constructed CapsBench"</li>
+        <li>• Construction process parallels CapsBench</li>
       </ul>
     </div>
-
     <div class="card">
-      <div class="card-header">
-        <div class="card-dot rose"></div>
-        <h3>Key Findings</h3>
-      </div>
+      <h3><span style="background:#e63946"></span>Key Findings</h3>
       <ul>
         <li>• PG Captioner scores highest (72.19%)</li>
         <li>• All models miss entity shape, size, artifacts</li>
