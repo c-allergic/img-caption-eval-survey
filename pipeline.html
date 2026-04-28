@@ -1,5 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background:#020617;width:100%;max-width:1100px">
->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CapsBench Pipeline</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'JetBrains Mono',monospace;background:#020617;min-height:100vh;padding:2rem;color:white}
+.container{max-width:1200px;margin:0 auto}
+.header{margin-bottom:2rem}
+.header-row{display:flex;align-items:center;gap:1rem;margin-bottom:.5rem}
+.pulse-dot{width:12px;height:12px;background:#22d3ee;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+h1{font-size:1.5rem;font-weight:700;letter-spacing:-.025em}
+.subtitle{color:#94a3b8;font-size:.875rem;margin-left:1.75rem}
+.diagram-container{background:rgba(15,23,42,.5);border-radius:1rem;border:1px solid #1e293b;padding:1.5rem;overflow-x:auto}
+svg{width:100%;min-width:1000px;display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:2rem}
+.card{background:rgba(15,23,42,.5);border-radius:.75rem;border:1px solid #1e293b;padding:1.25rem}
+.card-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.card-dot{width:8px;height:8px;border-radius:50%}
+.card-dot.cyan{background:#22d3ee}
+.card-dot.emerald{background:#34d399}
+.card-dot.violet{background:#a78bfa}
+.card-dot.amber{background:#fbbf24}
+.card-dot.rose{background:#fb7185}
+.card h3{font-size:.875rem;font-weight:600}
+.card ul{list-style:none;color:#94a3b8;font-size:.75rem}
+.card li{margin-bottom:.375rem}
+.footer{text-align:center;margin-top:1.5rem;color:#475569;font-size:.75rem}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-row">
+      <div class="pulse-dot"></div>
+      <h1>CapsBench Evaluation Pipeline</h1>
+    </div>
+    <p class="subtitle">200 images · 2,471 yes-no questions · 17 evaluation categories</p>
+  </div>
+
+  <div class="diagram-container">
+    <svg viewBox="0 0 1100 820">
       <defs>
         <marker id="arw" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
           <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
@@ -151,3 +195,51 @@
       <!-- Source -->
       <text x="40" y="740" fill="#475569" font-size="7">Source: Playground v3 — arXiv:2409.10695 · Dataset: huggingface.co/datasets/playgroundai/CapsBench</text>
     </svg>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot cyan"></div>
+        <h3>Core Dataset</h3>
+      </div>
+      <ul>
+        <li>• 200 hand-curated images</li>
+        <li>• 2,471 yes-no question pairs</li>
+        <li>• ~12 questions per image avg.</li>
+        <li>• 17 fine-grained categories</li>
+        <li>• 9 visual domains covered</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot amber"></div>
+        <h3>Relation to DPG-Bench</h3>
+      </div>
+      <ul>
+        <li>• DPG-Bench: text prompt → image → VQA</li>
+        <li>• CapsBench (reversed): image → caption → QA</li>
+        <li>• DPG-Bench Hard: GPT-4o caption → QA</li>
+        <li>• Both: "parallels how we constructed CapsBench"</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot rose"></div>
+        <h3>Key Findings</h3>
+      </div>
+      <ul>
+        <li>• PG Captioner scores highest (72.19%)</li>
+        <li>• All models miss entity shape, size, artifacts</li>
+        <li>• Caption length ≠ quality</li>
+        <li>• QA ambiguity needs ablation study</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer">CapsBench Pipeline · Built from Playground v3 technical report · April 2026</p>
+</div>
+</body>
+</html>
