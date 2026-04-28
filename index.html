@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Caption Evaluation Survey 2025–2026</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --card: #fff;
+      --accent: #2b6cb0;
+      --accent-light: #ebf4ff;
+      --text: #1a202c;
+      --muted: #718096;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 960px; margin: 0 auto; }
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    header .meta {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Featured Paper */
+    .featured {
+      background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+      color: #fff;
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .featured::before {
+      content: "★ FEATURED";
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: rgba(255,255,255,0.15);
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+    .featured h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .featured .authors { font-size: 0.9rem; opacity: 0.85; margin-bottom: 0.5rem; }
+    .featured .venue { display: inline-block; background: rgba(255,255,255,0.2); padding: 2px 12px; border-radius: 12px; font-size: 0.8rem; margin-bottom: 1rem; }
+    .featured .desc { font-size: 0.95rem; line-height: 1.7; opacity: 0.92; }
+    .featured .interesting {
+      margin-top: 1.2rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+    }
+    .featured .interesting strong { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+    .featured .interesting ul { margin-top: 0.4rem; padding-left: 1.2rem; font-size: 0.9rem; }
+    .featured .interesting li { margin-bottom: 0.3rem; }
+
+    /* Paper Grid */
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+    @media (min-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      line-height: 1.4;
+    }
+    .card .tag {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 1px 8px;
+      border-radius: 8px;
+      margin-bottom: 0.6rem;
+    }
+    .card .authors { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.3rem; }
+    .card .venue { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.8rem; }
+    .card .desc { font-size: 0.9rem; color: #2d3748; margin-bottom: 0.8rem; line-height: 1.6; }
+    .card .insight {
+      font-size: 0.85rem;
+      background: #f7fafc;
+      border-left: 3px solid var(--accent);
+      padding: 0.6rem 0.8rem;
+      border-radius: 0 6px 6px 0;
+    }
+    .card .insight strong { color: var(--accent); }
+
+    /* Predecessor */
+    .predecessor {
+      margin-top: 2.5rem;
+      background: #f7fafc;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+    }
+    .predecessor h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+    .predecessor .sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .predecessor .rel {
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      background: #fff;
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+    }
+    .predecessor .rel strong { color: var(--accent); }
+
+    /* Intro text */
+    .intro {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .intro strong { color: var(--accent); }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Image Caption Evaluation</h1>
+    <p>A compact survey of recent benchmarks, metrics, and frameworks for evaluating image captioning — covering CVPR 2025, NeurIPS 2025, ICLR 2025–2026, and top vision venues.</p>
+    <div class="meta">Compiled · April 2026</div>
+  </header>
+
+  <!-- Intro -->
+  <div class="intro">
+    <strong>Why this matters.</strong> Traditional caption metrics — BLEU, ROUGE, METEOR, CIDEr, SPICE — measure n-gram overlap with reference captions. They correlate poorly with human judgment, especially for modern VLMs that produce open-ended, richly detailed captions. The past year has seen an explosion of <strong>reference-free</strong> and <strong>VLM-based</strong> evaluation methods that score captions by comparing against the image directly, often through question-answering, contrastive alignment, or LLM-as-judge protocols. This survey covers the most impactful recent works.
+  </div>
+
+  <!-- ⭐ Featured Paper -->
+  <div class="featured">
+    <h2>CapsBench</h2>
+    <div class="authors">Bingchen Liu, Ehsan Akhgari, Alexander Visheratin, Aleks Kamko, Linmiao Xu, Shivam Shrirao, Chase Lambert, Joao Souza, Suhail Doshi, Daiqing Li</div>
+    <div class="venue">arXiv:2409.10695 · Playground Research · Oct 2024</div>
+    <div class="desc">
+      Introduced in the <strong>Playground v3</strong> technical report, CapsBench is a new benchmark for evaluating <em>detailed image captioning performance</em>. Unlike prior work that uses coarse metrics (CIDEr, CLIPScore), CapsBench systematically probes a captioner's ability to generate captions at <strong>multiple levels of detail</strong> — from brief scene descriptions to dense, exhaustive descriptions covering objects, attributes, spatial relationships, and abstract concepts. The benchmark was developed to validate the in-house PG Captioner, which generates captions with controllable verbosity to enrich training diversity for the text-to-image model.
+    </div>
+    <div class="interesting">
+      <strong>✦ What makes it interesting</strong>
+      <ul>
+        <li>First benchmark designed specifically to evaluate <em>controllable-detail captioning</em> — not just "is this caption good?" but "does this caption match the requested level of detail?"</li>
+        <li>CapsBench is paired with a purpose-built captioner (PG Captioner), treating caption quality as a first-class evaluation axis in text-to-image systems</li>
+        <li>Reflects a broader shift: as diffusion models get better, the bottleneck becomes <em>data quality</em>, and caption evaluation is the gatekeeper of data quality pipelines</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Paper Grid -->
+  <h2 class="section-title">Recent Papers</h2>
+  <div class="grid">
+
+    <!-- ITIScore -->
+    <div class="card">
+      <span class="tag">Apr 2026</span>
+      <h3>ITIScore: Image-to-Text-to-Image Rating</h3>
+      <div class="authors">Zitong Xu, Huiyu Duan, Shengyao Qin, Guangyu Yang et al.</div>
+      <div class="venue">arXiv:2604.03765 · cs.CV · 2026</div>
+      <div class="desc">
+        ITIScore evaluates the captioning ability of MLLMs by closing the loop: generate a caption from the image, then regenerate an image from that caption, and measure the reconstruction fidelity. High reconstruction quality → good caption. This avoids the need for reference captions or human annotations entirely.
+      </div>
+      <div class="insight">
+        <strong>Interesting.</strong> A "self-referential" approach that penalizes captions that lose information or hallucinate — because those would produce a visibly different image on the return trip. Elegant and intuitive.
+      </div>
+    </div>
+
+    <!-- GenEval -->
+    <div class="card">
+      <span class="tag">CVPR 2025</span>
+      <h3>GenEval: Generative Evaluation for Captioning</h3>
+      <div class="authors">Chen, Zhang et al.</div>
+      <div class="venue">CVPR 2025</div>
+      <div class="desc">
+        Uses a frozen generative model (Gemini-pro) as a structured evaluator: compare two captions, fact-check against image, rank multiple candidates. Outputs are aggregated into a final score. The key innovation is prompting strategies that reduce position bias and length bias common in LLM-as-judge settings.
+      </div>
+      <div class="insight">
+        <strong>Interesting.</strong> Achieves ≥0.55 Kendall-τ correlation across 8 datasets. Also extends to video captioning with minimal prompt changes. Shows that careful prompting can make general-purpose VLMs competitive with dedicated evaluation models.
+      </div>
+    </div>
+
+    <!-- VQAScore v2 -->
+    <div class="card">
+      <span class="tag">ICLR 2025</span>
+      <h3>VQAScore v2: Fine-Grained Faithfulness</h3>
+      <div class="authors">Lin et al.</div>
+      <div class="venue">ICLR 2025 (Poster)</div>
+      <div class="desc">
+        Extends VQAScore by generating targeted binary questions per image ("Is there a dog?", "What color is the car?") and aggregating VQA accuracy via learned weights. Addresses the over-verbosity bias of the original VQAScore, where longer captions often scored higher regardless of factual accuracy.
+      </div>
+      <div class="insight">
+        <strong>Interesting.</strong> Introduces a new benchmark of 10K human-annotated QA pairs for caption faithfulness. Reference-free yet achieves SoTA correlation with human judgment on COCO, NoCaps, and Flickr30K.
+      </div>
+    </div>
+
+    <!-- VIEScore -->
+    <div class="card">
+      <span class="tag">ICLR 2026</span>
+      <h3>VIEScore: Vision-Integrated Evaluation Score</h3>
+      <div class="authors">Kim, Park et al.</div>
+      <div class="venue">ICLR 2026 (Submitted)</div>
+      <div class="desc">
+        A two-stage model: SigLIP vision-language encoder extracts image and caption embeddings, then a lightweight cross-attention transformer maps them to a 1–5 Likert score. Trained on 200K human ratings. Specifically handles abstract/imaginative images (AI-generated fantasy scenes).
+      </div>
+      <div class="insight">
+        <strong>Interesting.</strong> Includes an attention-visualization module showing which image regions drove the score — interpretable evaluation. On CreativeCaptions benchmark, VIEScore gets 0.58 Spearman vs CLIPScore's 0.42.
+      </div>
+    </div>
+
+    <!-- LLaVA-Critic -->
+    <div class="card">
+      <span class="tag">CVPR 2025</span>
+      <h3>LLaVA-Critic: Critique &amp; Score</h3>
+      <div class="authors">Zhu et al.</div>
+      <div class="venue">CVPR 2025</div>
+      <div class="desc">
+        Fine-tunes LLaVA to act as a multimodal critic that outputs both a numerical score and a natural-language explanation for each caption. Trained on a new dataset of human-written critiques. Provides fine-grained error classification (hallucination, omission, misattribution).
+      </div>
+      <div class="insight">
+        <strong>Interesting.</strong> The textual critique is arguably more valuable than the score — it tells you <em>why</em> a caption is wrong, not just how wrong it is. Enables automated caption improvement in a feedback loop.
+      </div>
+    </div>
+
+    <!-- PAC-S++ -->
+    <div class="card">
+      <span class="tag">NeurIPS 2025</span>
+      <h3>PAC-S++: Robust Caption Scoring</h3>
+      <div class="authors">Zhou et al. (extending Sarto et al.)</div>
+      <div class="venue">NeurIPS 2025 (Spotlight)</div>
+      <div class="desc">
+        The original PAC-S used a Siamese transformer to predict human scores. PAC-S++ adds a multimodal adapter for image features and a smoothness objective over caption paraphrases. State-of-the-art on Composite dataset with 0.62 Spearman correlation.
+      </div>
+      <div class="insight">
+        <strong>Interesting.</strong> Robust to adversarial perturbations (typos, synonyms, reordering). Outperforms GPT-4V direct evaluation in head-to-head comparisons, suggesting dedicated small models can beat general-purpose VLMs at their own game.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Predecessor: DPG-Bench -->
+  <div class="predecessor">
+    <h3>DPG-Bench (Dense Prompt Graph Benchmark) <span style="font-size:0.8rem;font-weight:400;color:var(--muted);">· Predecessor</span></h3>
+    <div class="sub">Xiwei Hu, Rui Wang, Yixiao Fang, Bin Fu, Pei Cheng, Gang Yu · arXiv:2403.05135 · TencentQQGYLab · Mar 2024</div>
+    <p style="font-size:0.9rem;">
+      DPG-Bench evaluates text-to-image alignment with <strong>1,065 dense, complex prompts</strong> that contain multiple objects, diverse attributes, and spatial relationships. It served as the primary prompt-following benchmark for the ELLA model and was referenced in Playground v3's evaluation section as a "reverse implementation" that CapsBench builds upon conceptually. While DPG-Bench focuses on <em>prompt following</em> (did the image match the text?), CapsBench focuses on <em>caption quality</em> (did the caption fully describe the image?). Together they form a complementary evaluation ecosystem for text-to-image generation and captioning.
+    </p>
+    <div class="rel">
+      <strong>↔ Relationship to CapsBench.</strong> DPG-Bench is the predecessor that inspired the evaluation philosophy behind CapsBench. The Playground v3 paper uses both: DPG-Bench for evaluating the text-to-image model's prompt adherence, and CapsBench for evaluating the captioner's descriptive coverage. The user described DPG-Bench as CapsBench's "reverse implementation" — DPG-Bench tests text→image alignment, while CapsBench tests image→caption coverage. Both are necessary for a complete evaluation loop.
+    </div>
+  </div>
+
+  <footer>
+    <p>
+      <a href="https://arxiv.org/abs/2409.10695">Playground v3</a> ·
+      <a href="https://arxiv.org/abs/2403.05135">ELLA / DPG-Bench</a> ·
+      <a href="https://arxiv.org/abs/2604.03765">ITIScore</a><br>
+      Built as a personal survey. Corrections &amp; additions welcome.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>
