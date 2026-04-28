@@ -1,0 +1,142 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "hermes-agent",
+  "elements": [
+    { "type": "text", "id": "title", "x": 290, "y": 10, "text": "CapsBench Evaluation Pipeline", "fontSize": 28, "fontFamily": 1, "strokeColor": "#1e1e1e", "originalText": "CapsBench Evaluation Pipeline", "autoResize": true },
+
+    { "type": "text", "id": "subtitle", "x": 255, "y": 48, "text": "200 images · 2,471 yes-no questions · 17 categories", "fontSize": 16, "fontFamily": 1, "strokeColor": "#757575", "originalText": "200 images · 2,471 yes-no questions · 17 categories", "autoResize": true },
+
+    {"type":"rectangle","id":"bg1","x":40,"y":80,"width":820,"height":370,"backgroundColor":"#ebf8ff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#4a9eed","strokeWidth":1,"opacity":35},
+    {"type":"text","id":"ph1","x":50,"y":85,"text":"Phase 1: Benchmark Construction","fontSize":16,"fontFamily":1,"strokeColor":"#2b6cb0","originalText":"Phase 1: Benchmark Construction","autoResize":true},
+
+    {"type":"rectangle","id":"bg2","x":40,"y":480,"width":820,"height":350,"backgroundColor":"#f0fff4","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#22c55e","strokeWidth":1,"opacity":35},
+    {"type":"text","id":"ph2","x":50,"y":485,"text":"Phase 2: Caption Evaluation","fontSize":16,"fontFamily":1,"strokeColor":"#276749","originalText":"Phase 2: Caption Evaluation","autoResize":true},
+
+    {"type":"rectangle","id":"s1","x":80,"y":120,"width":200,"height":80,"backgroundColor":"#a5d8ff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#4a9eed","strokeWidth":2,"boundElements":[{"id":"t_s1","type":"text"},{"id":"a1","type":"arrow"}]},
+    {"type":"text","id":"t_s1","x":85,"y":138,"width":190,"height":20,"text":"① Image Curation","fontSize":16,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center","verticalAlign":"middle","containerId":"s1","originalText":"① Image Curation","autoResize":true},
+    {"type":"text","id":"t_s1b","x":90,"y":162,"width":180,"height":18,"text":"200 images, 9 diverse types","fontSize":13,"fontFamily":1,"strokeColor":"#2b6cb0","textAlign":"center","verticalAlign":"middle","containerId":"s1","originalText":"200 images, 9 diverse types","autoResize":true},
+
+    {"type":"arrow","id":"a1","x":280,"y":160,"width":60,"height":0,"points":[[0,0],[60,0]],"endArrowhead":"arrow","startBinding":{"elementId":"s1","fixedPoint":[1,0.5]},"endBinding":{"elementId":"s2","fixedPoint":[0,0.5]}},
+
+    {"type":"rectangle","id":"s2","x":340,"y":110,"width":240,"height":100,"backgroundColor":"#fff3bf","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#f59e0b","strokeWidth":2,"boundElements":[{"id":"t_s2","type":"text"},{"id":"a1","type":"arrow"},{"id":"a2","type":"arrow"}]},
+    {"type":"text","id":"t_s2","x":345,"y":126,"width":230,"height":20,"text":"② QA Pair Generation","fontSize":16,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center","verticalAlign":"middle","containerId":"s2","originalText":"② QA Pair Generation","autoResize":true},
+    {"type":"text","id":"t_s2b","x":345,"y":148,"width":230,"height":18,"text":"\"Based on the image\" — Sec 4.2","fontSize":13,"fontFamily":1,"strokeColor":"#c05621","textAlign":"center","verticalAlign":"middle","containerId":"s2","originalText":"\"Based on the image\" — Sec 4.2","autoResize":true},
+    {"type":"text","id":"t_s2c","x":345,"y":172,"width":230,"height":18,"text":"~12 questions/image · 2,471 total","fontSize":13,"fontFamily":1,"strokeColor":"#c05621","textAlign":"center","verticalAlign":"middle","containerId":"s2","originalText":"~12 questions/image · 2,471 total","autoResize":true},
+
+    {"type":"arrow","id":"a2","x":580,"y":160,"width":60,"height":0,"points":[[0,0],[60,0]],"endArrowhead":"arrow","startBinding":{"elementId":"s2","fixedPoint":[1,0.5]},"endBinding":{"elementId":"s3","fixedPoint":[0,0.5]}},
+
+    {"type":"rectangle","id":"s3","x":640,"y":120,"width":200,"height":80,"backgroundColor":"#d0bfff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#8b5cf6","strokeWidth":2,"boundElements":[{"id":"t_s3","type":"text"},{"id":"a2","type":"arrow"}]},
+    {"type":"text","id":"t_s3","x":645,"y":138,"width":190,"height":20,"text":"③ 17-Category Tagging","fontSize":16,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center","verticalAlign":"middle","containerId":"s3","originalText":"③ 17-Category Tagging","autoResize":true},
+    {"type":"text","id":"t_s3b","x":645,"y":162,"width":190,"height":18,"text":"General · Color · Entity · ...","fontSize":13,"fontFamily":1,"strokeColor":"#553c9a","textAlign":"center","verticalAlign":"middle","containerId":"s3","originalText":"General · Color · Entity · ...","autoResize":true},
+
+    {"type":"text","id":"ambig_title","x":90,"y":230,"text":"⚠️ Ambiguity: How are QA pairs generated?","fontSize":15,"fontFamily":1,"strokeColor":"#c05621","originalText":"⚠️ Ambiguity: How are QA pairs generated?","autoResize":true},
+
+    {"type":"rectangle","id":"ambig_a","x":80,"y":258,"width":340,"height":65,"backgroundColor":"#ffc9c9","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#ef4444","strokeWidth":1,"opacity":50,"boundElements":[{"id":"t_ambig_a","type":"text"}]},
+    {"type":"text","id":"t_ambig_a","x":85,"y":265,"width":330,"height":20,"text":"Reading A: VLM looks at image directly","fontSize":15,"fontFamily":1,"strokeColor":"#c53030","textAlign":"center","verticalAlign":"middle","containerId":"ambig_a","originalText":"Reading A: VLM looks at image directly","autoResize":true},
+    {"type":"text","id":"t_ambig_a2","x":85,"y":290,"width":330,"height":18,"text":"Supported by: \"Based on the image\" (Sec 4.2)","fontSize":12,"fontFamily":1,"strokeColor":"#c53030","textAlign":"center","verticalAlign":"middle","containerId":"ambig_a","originalText":"Supported by: \"Based on the image\" (Sec 4.2)","autoResize":true},
+
+    {"type":"rectangle","id":"ambig_b","x":480,"y":258,"width":340,"height":65,"backgroundColor":"#ffd8a8","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#f59e0b","strokeWidth":1,"opacity":50,"boundElements":[{"id":"t_ambig_b","type":"text"}]},
+    {"type":"text","id":"t_ambig_b","x":485,"y":265,"width":330,"height":20,"text":"Reading B: Caption → QA (like DPG-Bench Hard)","fontSize":15,"fontFamily":1,"strokeColor":"#c05621","textAlign":"center","verticalAlign":"middle","containerId":"ambig_b","originalText":"Reading B: Caption → QA (like DPG-Bench Hard)","autoResize":true},
+    {"type":"text","id":"t_ambig_b2","x":485,"y":290,"width":330,"height":18,"text":"Supported by: \"parallels how we constructed CapsBench\"","fontSize":12,"fontFamily":1,"strokeColor":"#c05621","textAlign":"center","verticalAlign":"middle","containerId":"ambig_b","originalText":"Supported by: \"parallels how we constructed CapsBench\"","autoResize":true},
+
+    {"type":"rectangle","id":"cats_bg","x":80,"y":345,"width":750,"height":85,"backgroundColor":"#ffffff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#d0bfff","strokeWidth":1,"opacity":60},
+    {"type":"text","id":"cats_title","x":90,"y":350,"text":"17 Evaluation Categories","fontSize":14,"fontFamily":1,"strokeColor":"#553c9a","originalText":"17 Evaluation Categories","autoResize":true},
+
+    {"type":"rectangle","id":"cat1","x":85,"y":375,"width":75,"height":22,"backgroundColor":"#bee3f8","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#4a9eed","strokeWidth":1,"boundElements":[{"id":"t_c1","type":"text"}]},
+    {"type":"text","id":"t_c1","x":87,"y":376,"width":71,"height":16,"text":"General","fontSize":11,"fontFamily":1,"strokeColor":"#2b6cb0","textAlign":"center","verticalAlign":"middle","containerId":"cat1","originalText":"General","autoResize":true},
+
+    {"type":"rectangle","id":"cat2","x":168,"y":375,"width":75,"height":22,"backgroundColor":"#bee3f8","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#4a9eed","strokeWidth":1,"boundElements":[{"id":"t_c2","type":"text"}]},
+    {"type":"text","id":"t_c2","x":170,"y":376,"width":71,"height":16,"text":"Image Type","fontSize":11,"fontFamily":1,"strokeColor":"#2b6cb0","textAlign":"center","verticalAlign":"middle","containerId":"cat2","originalText":"Image Type","autoResize":true},
+
+    {"type":"rectangle","id":"cat3","x":251,"y":375,"width":60,"height":22,"backgroundColor":"#bee3f8","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#4a9eed","strokeWidth":1,"boundElements":[{"id":"t_c3","type":"text"}]},
+    {"type":"text","id":"t_c3","x":253,"y":376,"width":56,"height":16,"text":"Text","fontSize":11,"fontFamily":1,"strokeColor":"#2b6cb0","textAlign":"center","verticalAlign":"middle","containerId":"cat3","originalText":"Text","autoResize":true},
+
+    {"type":"rectangle","id":"cat4","x":319,"y":375,"width":60,"height":22,"backgroundColor":"#bee3f8","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#4a9eed","strokeWidth":1,"boundElements":[{"id":"t_c4","type":"text"}]},
+    {"type":"text","id":"t_c4","x":321,"y":376,"width":56,"height":16,"text":"Color","fontSize":11,"fontFamily":1,"strokeColor":"#2b6cb0","textAlign":"center","verticalAlign":"middle","containerId":"cat4","originalText":"Color","autoResize":true},
+
+    {"type":"rectangle","id":"cat5","x":387,"y":375,"width":65,"height":22,"backgroundColor":"#bee3f8","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#4a9eed","strokeWidth":1,"boundElements":[{"id":"t_c5","type":"text"}]},
+    {"type":"text","id":"t_c5","x":389,"y":376,"width":61,"height":16,"text":"Position","fontSize":11,"fontFamily":1,"strokeColor":"#2b6cb0","textAlign":"center","verticalAlign":"middle","containerId":"cat5","originalText":"Position","autoResize":true},
+
+    {"type":"rectangle","id":"cat6","x":460,"y":375,"width":65,"height":22,"backgroundColor":"#bee3f8","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#4a9eed","strokeWidth":1,"boundElements":[{"id":"t_c6","type":"text"}]},
+    {"type":"text","id":"t_c6","x":462,"y":376,"width":61,"height":16,"text":"Relation","fontSize":11,"fontFamily":1,"strokeColor":"#2b6cb0","textAlign":"center","verticalAlign":"middle","containerId":"cat6","originalText":"Relation","autoResize":true},
+
+    {"type":"rectangle","id":"cat7","x":533,"y":375,"width":80,"height":22,"backgroundColor":"#bee3f8","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#4a9eed","strokeWidth":1,"boundElements":[{"id":"t_c7","type":"text"}]},
+    {"type":"text","id":"t_c7","x":535,"y":376,"width":76,"height":16,"text":"Rel. Position","fontSize":11,"fontFamily":1,"strokeColor":"#2b6cb0","textAlign":"center","verticalAlign":"middle","containerId":"cat7","originalText":"Rel. Position","autoResize":true},
+
+    {"type":"rectangle","id":"cat8","x":85,"y":402,"width":75,"height":22,"backgroundColor":"#c6f6d5","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#22c55e","strokeWidth":1,"boundElements":[{"id":"t_c8","type":"text"}]},
+    {"type":"text","id":"t_c8","x":87,"y":403,"width":71,"height":16,"text":"Entity","fontSize":11,"fontFamily":1,"strokeColor":"#276749","textAlign":"center","verticalAlign":"middle","containerId":"cat8","originalText":"Entity","autoResize":true},
+
+    {"type":"rectangle","id":"cat9","x":168,"y":402,"width":80,"height":22,"backgroundColor":"#c6f6d5","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#22c55e","strokeWidth":1,"boundElements":[{"id":"t_c9","type":"text"}]},
+    {"type":"text","id":"t_c9","x":170,"y":403,"width":76,"height":16,"text":"Entity Size","fontSize":11,"fontFamily":1,"strokeColor":"#276749","textAlign":"center","verticalAlign":"middle","containerId":"cat9","originalText":"Entity Size","autoResize":true},
+
+    {"type":"rectangle","id":"cat10","x":256,"y":402,"width":"85","height":22,"backgroundColor":"#c6f6d5","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#22c55e","strokeWidth":1,"boundElements":[{"id":"t_c10","type":"text"}]},
+    {"type":"text","id":"t_c10","x":258,"y":403,"width":81,"height":16,"text":"Entity Shape","fontSize":11,"fontFamily":1,"strokeColor":"#276749","textAlign":"center","verticalAlign":"middle","containerId":"cat10","originalText":"Entity Shape","autoResize":true},
+
+    {"type":"rectangle","id":"cat11","x":349,"y":402,"width":60,"height":22,"backgroundColor":"#c6f6d5","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#22c55e","strokeWidth":1,"boundElements":[{"id":"t_c11","type":"text"}]},
+    {"type":"text","id":"t_c11","x":351,"y":403,"width":56,"height":16,"text":"Count","fontSize":11,"fontFamily":1,"strokeColor":"#276749","textAlign":"center","verticalAlign":"middle","containerId":"cat11","originalText":"Count","autoResize":true},
+
+    {"type":"rectangle","id":"cat12","x":417,"y":402,"width":65,"height":22,"backgroundColor":"#c6f6d5","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#22c55e","strokeWidth":1,"boundElements":[{"id":"t_c12","type":"text"}]},
+    {"type":"text","id":"t_c12","x":419,"y":403,"width":61,"height":16,"text":"Emotion","fontSize":11,"fontFamily":1,"strokeColor":"#276749","textAlign":"center","verticalAlign":"middle","containerId":"cat12","originalText":"Emotion","autoResize":true},
+
+    {"type":"rectangle","id":"cat13","x":490,"y":402,"width":55,"height":22,"backgroundColor":"#fed7d7","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#ef4444","strokeWidth":1,"boundElements":[{"id":"t_c13","type":"text"}]},
+    {"type":"text","id":"t_c13","x":492,"y":403,"width":51,"height":16,"text":"Blur","fontSize":11,"fontFamily":1,"strokeColor":"#c53030","textAlign":"center","verticalAlign":"middle","containerId":"cat13","originalText":"Blur","autoResize":true},
+
+    {"type":"rectangle","id":"cat14","x":553,"y":402,"width":100,"height":22,"backgroundColor":"#fed7d7","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#ef4444","strokeWidth":1,"boundElements":[{"id":"t_c14","type":"text"}]},
+    {"type":"text","id":"t_c14","x":555,"y":403,"width":96,"height":16,"text":"Image Artifacts","fontSize":11,"fontFamily":1,"strokeColor":"#c53030","textAlign":"center","verticalAlign":"middle","containerId":"cat14","originalText":"Image Artifacts","autoResize":true},
+
+    {"type":"rectangle","id":"cat15","x":85,"y":429,"width":100,"height":22,"backgroundColor":"#feebc8","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#f59e0b","strokeWidth":1,"boundElements":[{"id":"t_c15","type":"text"}]},
+    {"type":"text","id":"t_c15","x":87,"y":430,"width":96,"height":16,"text":"Proper Noun","fontSize":11,"fontFamily":1,"strokeColor":"#c05621","textAlign":"center","verticalAlign":"middle","containerId":"cat15","originalText":"Proper Noun","autoResize":true},
+
+    {"type":"rectangle","id":"cat16","x":193,"y":429,"width":95,"height":22,"backgroundColor":"#e9d8fd","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#8b5cf6","strokeWidth":1,"boundElements":[{"id":"t_c16","type":"text"}]},
+    {"type":"text","id":"t_c16","x":195,"y":430,"width":91,"height":16,"text":"Color Palette","fontSize":11,"fontFamily":1,"strokeColor":"#553c9a","textAlign":"center","verticalAlign":"middle","containerId":"cat16","originalText":"Color Palette","autoResize":true},
+
+    {"type":"rectangle","id":"cat17","x":296,"y":429,"width":95,"height":22,"backgroundColor":"#e9d8fd","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#8b5cf6","strokeWidth":1,"boundElements":[{"id":"t_c17","type":"text"}]},
+    {"type":"text","id":"t_c17","x":298,"y":430,"width":91,"height":16,"text":"Color Grading","fontSize":11,"fontFamily":1,"strokeColor":"#553c9a","textAlign":"center","verticalAlign":"middle","containerId":"cat17","originalText":"Color Grading","autoResize":true},
+
+    {"type":"arrow","id":"a_phase","x":450,"y":450,"width":0,"height":30,"points":[[0,0],[0,30]],"strokeColor":"#4a9eed","strokeWidth":2,"endArrowhead":"arrow"},
+
+    {"type":"rectangle","id":"e1","x":60,"y":512,"width":160,"height":70,"backgroundColor":"#a5d8ff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#4a9eed","strokeWidth":2,"boundElements":[{"id":"t_e1","type":"text"},{"id":"ea1","type":"arrow"}]},
+    {"type":"text","id":"t_e1","x":65,"y":527,"width":150,"height":20,"text":"Candidate Caption","fontSize":16,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center","verticalAlign":"middle","containerId":"e1","originalText":"Candidate Caption","autoResize":true},
+    {"type":"text","id":"t_e1b","x":65,"y":550,"width":150,"height":16,"text":"from model under test","fontSize":12,"fontFamily":1,"strokeColor":"#2b6cb0","textAlign":"center","verticalAlign":"middle","containerId":"e1","originalText":"from model under test","autoResize":true},
+
+    {"type":"arrow","id":"ea1","x":220,"y":547,"width":50,"height":0,"points":[[0,0],[50,0]],"endArrowhead":"arrow","startBinding":{"elementId":"e1","fixedPoint":[1,0.5]},"endBinding":{"elementId":"e2","fixedPoint":[0,0.5]}},
+
+    {"type":"rectangle","id":"e2","x":270,"y":502,"width":230,"height":90,"backgroundColor":"#fff3bf","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#f59e0b","strokeWidth":2,"boundElements":[{"id":"t_e2","type":"text"},{"id":"ea1","type":"arrow"},{"id":"ea2","type":"arrow"}]},
+    {"type":"text","id":"t_e2","x":275,"y":516,"width":220,"height":20,"text":"④ LLM Answers Questions","fontSize":16,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center","verticalAlign":"middle","containerId":"e2","originalText":"④ LLM Answers Questions","autoResize":true},
+    {"type":"text","id":"t_e2b","x":275,"y":540,"width":220,"height":16,"text":"Claude-3.5 Sonnet","fontSize":13,"fontFamily":1,"strokeColor":"#c05621","textAlign":"center","verticalAlign":"middle","containerId":"e2","originalText":"Claude-3.5 Sonnet","autoResize":true},
+    {"type":"text","id":"t_e2c","x":275,"y":560,"width":220,"height":16,"text":"Caption only · Options: Yes / No / N/A","fontSize":12,"fontFamily":1,"strokeColor":"#c05621","textAlign":"center","verticalAlign":"middle","containerId":"e2","originalText":"Caption only · Options: Yes / No / N/A","autoResize":true},
+
+    {"type":"arrow","id":"ea2","x":500,"y":547,"width":50,"height":0,"points":[[0,0],[50,0]],"endArrowhead":"arrow","startBinding":{"elementId":"e2","fixedPoint":[1,0.5]},"endBinding":{"elementId":"e3","fixedPoint":[0,0.5]}},
+
+    {"type":"rectangle","id":"e3","x":550,"y":512,"width":180,"height":70,"backgroundColor":"#d0bfff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#8b5cf6","strokeWidth":2,"boundElements":[{"id":"t_e3","type":"text"},{"id":"ea2","type":"arrow"},{"id":"ea3","type":"arrow"}]},
+    {"type":"text","id":"t_e3","x":555,"y":527,"width":170,"height":20,"text":"⑤ Consensus (3x)","fontSize":16,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center","verticalAlign":"middle","containerId":"e3","originalText":"⑤ Consensus (3x)","autoResize":true},
+    {"type":"text","id":"t_e3b","x":555,"y":550,"width":170,"height":16,"text":"Majority vote per question","fontSize":12,"fontFamily":1,"strokeColor":"#553c9a","textAlign":"center","verticalAlign":"middle","containerId":"e3","originalText":"Majority vote per question","autoResize":true},
+
+    {"type":"arrow","id":"ea3","x":730,"y":547,"width":60,"height":0,"points":[[0,0],[60,0]],"endArrowhead":"arrow","startBinding":{"elementId":"e3","fixedPoint":[1,0.5]},"endBinding":{"elementId":"e4","fixedPoint":[0,0.5]}},
+
+    {"type":"rectangle","id":"e4","x":790,"y":512,"width":"200","height":70,"backgroundColor":"#b2f2bb","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#22c55e","strokeWidth":2,"boundElements":[{"id":"t_e4","type":"text"},{"id":"ea3","type":"arrow"}]},
+    {"type":"text","id":"t_e4","x":795,"y":527,"width":190,"height":20,"text":"⑥ Score Computation","fontSize":16,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center","verticalAlign":"middle","containerId":"e4","originalText":"⑥ Score Computation","autoResize":true},
+    {"type":"text","id":"t_e4b","x":795,"y":550,"width":190,"height":16,"text":"Per-category + combined acc.","fontSize":12,"fontFamily":1,"strokeColor":"#276749","textAlign":"center","verticalAlign":"middle","containerId":"e4","originalText":"Per-category + combined acc.","autoResize":true},
+
+    {"type":"text","id":"res_title","x":150,"y":610,"text":"Results (from Section 7, using Claude-3.5 Sonnet as QA model):","fontSize":14,"fontFamily":1,"strokeColor":"#1e1e1e","originalText":"Results (from Section 7, using Claude-3.5 Sonnet as QA model):","autoResize":true},
+
+    {"type":"rectangle","id":"res1","x":80,"y":642,"width":200,"height":40,"backgroundColor":"#b2f2bb","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#22c55e","strokeWidth":2,"boundElements":[{"id":"t_r1","type":"text"}]},
+    {"type":"text","id":"t_r1","x":85,"y":648,"width":190,"height":20,"text":"PG Captioner: 72.19%","fontSize":15,"fontFamily":1,"strokeColor":"#276749","textAlign":"center","verticalAlign":"middle","containerId":"res1","originalText":"PG Captioner: 72.19%","autoResize":true},
+
+    {"type":"rectangle","id":"res2","x":320,"y":642,"width":"200","height":40,"backgroundColor":"#d0bfff","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#8b5cf6","strokeWidth":2,"boundElements":[{"id":"t_r2","type":"text"}]},
+    {"type":"text","id":"t_r2","x":325,"y":648,"width":190,"height":20,"text":"Claude-3.5 Sonnet: 71.78%","fontSize":15,"fontFamily":1,"strokeColor":"#553c9a","textAlign":"center","verticalAlign":"middle","containerId":"res2","originalText":"Claude-3.5 Sonnet: 71.78%","autoResize":true},
+
+    {"type":"rectangle","id":"res3","x":555,"y":642,"width":180,"height":40,"backgroundColor":"#ffd8a8","fillStyle":"solid","roundness":{"type":3},"strokeColor":"#f59e0b","strokeWidth":2,"boundElements":[{"id":"t_r3","type":"text"}]},
+    {"type":"text","id":"t_r3","x":560,"y":648,"width":170,"height":20,"text":"GPT-4o: 70.66%","fontSize":15,"fontFamily":1,"strokeColor":"#c05621","textAlign":"center","verticalAlign":"middle","containerId":"res3","originalText":"GPT-4o: 70.66%","autoResize":true},
+
+    {"type":"text","id":"weakness_note","x":80,"y":700,"text":"Weaknesses revealed: entity shape, entity size, visual artifacts are poorly captured by all models","fontSize":12,"fontFamily":1,"strokeColor":"#757575","originalText":"Weaknesses revealed: entity shape, entity size, visual artifacts are poorly captured by all models","autoResize":true},
+    {"type":"text","id":"weakness_note2","x":80,"y":720,"text":"Caption length does NOT strongly correlate with CapsBench score","fontSize":12,"fontFamily":1,"strokeColor":"#757575","originalText":"Caption length does NOT strongly correlate with CapsBench score","autoResize":true},
+
+    {"type":"text","id":"footnote","x":80,"y":800,"text":"* Image types: film scenes, cartoon scenes, movie posters, invitations, ads, casual/street/landscape/interior photography","fontSize":11,"fontFamily":1,"strokeColor":"#a0aec0","originalText":"* Image types: film scenes, cartoon scenes, movie posters, invitations, ads, casual/street/landscape/interior photography","autoResize":true},
+    {"type":"text","id":"footnote2","x":80,"y":818,"text":"Inspired by DSG (Davidsonian Scene Graph) and DPG-Bench. \"Reversed\" direction: caption evaluation instead of image evaluation.","fontSize":11,"fontFamily":1,"strokeColor":"#a0aec0","originalText":"Inspired by DSG (Davidsonian Scene Graph) and DPG-Bench. \"Reversed\" direction: caption evaluation instead of image evaluation.","autoResize":true}
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  }
+}

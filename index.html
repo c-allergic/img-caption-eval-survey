@@ -302,7 +302,10 @@
 
     <!-- Diagram -->
     <div class="diagram">
-      <img src="pipeline.svg" alt="CapsBench Pipeline Diagram" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--border);">
+      <a href="https://excalidraw.com/#json=DLpitvOS_sCgOutXOEDbb,C9AfHVlDpifcAz8rSDB6MA" target="_blank">
+        <img src="pipeline.svg" alt="CapsBench Pipeline Diagram" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--border);cursor:pointer">
+      </a>
+      <p style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">Click diagram to open in Excalidraw (interactive, hand-drawn style) · <a href="https://excalidraw.com/#json=DLpitvOS_sCgOutXOEDbb,C9AfHVlDpifcAz8rSDB6MA" target="_blank">open link</a></p>
     </div>
 
     <!-- Step-by-step -->
@@ -349,7 +352,19 @@
     <!-- Key Insight Box -->
     <div class="detail-box" style="margin-top:1.5rem;background:#ebf8ff;border-color:#90cdf4;">
       <h4>💡 The "Reversed" Insight</h4>
-      <p>CapsBench reverses the direction of DPG-Bench. DPG-Bench: text prompt → generate image → ask VQA questions about the image. CapsBench: look at image → generate QA pairs from image → evaluate if a <strong>caption</strong> (not the image) can answer them correctly. If the caption lacks information needed to answer "yes" to a question the image would answer "yes" to → the caption is incomplete. This is a direct faithfulness and completeness check.</p>
+      <p>CapsBench reverses the direction of DPG-Bench. DPG-Bench: text prompt → generate image → ask VQA questions about the image. CapsBench: the QA pairs are about <strong>image content</strong> ("based on the image" per Sec 4.2) → evaluate if a <strong>caption</strong> (not the image) can answer them correctly. If the caption lacks information needed to answer "yes" to a question the image would answer "yes" to → the caption is incomplete. This is a direct faithfulness and completeness check.</p>
+    </div>
+
+    <!-- Hybrid Approach -->
+    <div class="detail-box" style="margin-top:0.8rem;background:#fefcbf;border-color:#ecc94b;">
+      <h4>💡 Alternative: Joint (Image, Caption) Question Generation</h4>
+      <p>If replicating CapsBench, a robust middle ground between the two ambiguous readings is to <strong>feed both the image and a candidate caption to the LLM</strong> when generating QA pairs. This ensures:</p>
+      <ul style="margin-top:0.3rem">
+        <li><strong>Image</strong> guarantees full coverage — no visual element is missed</li>
+        <li><strong>Caption</strong> anchors question phrasing to what the caption can plausibly answer</li>
+        <li>The hybrid produces questions that are <em>grounded in the image</em> (fidelity to Sec 4.2's "based on the image") but <em>answerable from text</em> (compatible with the DPG-Bench Hard parallel)</li>
+      </ul>
+      <p style="margin-top:0.5rem">Recommended reproduction setup: run two ablations — (image) only and (image+caption) — and report both. This resolves the ambiguity transparently.</p>
     </div>
 
     <!-- Example from paper -->
