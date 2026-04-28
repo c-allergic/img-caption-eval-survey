@@ -1,232 +1,145 @@
-#set page(width: auto, height: auto, margin: 0.5cm)
-#set text(font: ("Helvetica", "Arial"))
+#import "@preview/cetz:0.5.0"
+#set page(width: auto, height: auto, margin: 8pt)
 
-#let accent-blue = rgb("#2b6cb0")
-#let accent-green = rgb("#38a169")
-#let accent-purple = rgb("#805ad5")
-#let accent-orange = rgb("#dd6b20")
-#let accent-red = rgb("#e53e3e")
-#let gray-light = rgb("#edf2f7")
-#let gray-border = rgb("#cbd5e0")
-#let gray-muted = rgb("#718096")
-#let dark-text = rgb("#1a202c")
+#cetz.canvas(length: 1cm, {
+  import cetz.draw: *
 
-// =========== Helper ===========
-#let boxed(content, fill: white, stroke: accent-blue) = block(
-  width: 100%, height: 100%,
-  fill: fill, stroke: 1.5pt + stroke,
-  radius: 6pt,
-  inset: 6pt,
-  align(center + horizon, content)
-)
+  // ---- Colors ----
+  let c-blue = rgb("#2b6cb0")
+  let c-green = rgb("#38a169")
+  let c-purple = rgb("#805ad5")
+  let c-orange = rgb("#dd6b20")
+  let c-red = rgb("#e53e3e")
+  let c-muted = rgb("#718096")
+  let c-dark = rgb("#1a202c")
 
-// =========== Title ===========
-#align(center)[
-  #text(size: 18pt, weight: "bold")[CapsBench Evaluation Pipeline]
-  #linebreak()
-  #text(size: 9pt, fill: gray-muted)[200 images · 2,471 yes-no questions · 17 categories]
-]
+  // ---- Title ----
+  content((8, -0.3), [
+    #text(size: 16pt, weight: "bold")[CapsBench Evaluation Pipeline]
+  ])
+  content((8, -1.0), text(size: 8pt, fill: c-muted)[200 images · 2,471 yes-no questions · 17 categories])
 
-#v(8pt)
+  // ===================================================
+  // PHASE 1 BACKGROUND
+  // ===================================================
+  rect((0.5, -1.7), (15.5, -8.5), fill: rgb("#ebf8ff"), stroke: 1pt + c-blue)
+  content((0.8, -2.0), text(size: 10pt, weight: "bold", fill: c-blue)[Phase 1: Benchmark Construction])
 
-// =========== Phase 1 ===========
-#block(
-  width: 100%,
-  fill: rgb("#ebf8ff"),
-  stroke: 1pt + accent-blue,
-  radius: 8pt,
-  inset: 8pt,
-  [
-    #text(size: 11pt, weight: "bold", fill: accent-blue)[Phase 1: Benchmark Construction]
+  // Step 1: Image Curation
+  rect((1.0, -2.8), (3.5, -4.2), fill: white, stroke: c-blue)
+  content((2.75, -3.15), text(size: 10pt, weight: "bold", fill: c-blue)[① Image Collection])
+  content((2.75, -3.55), text(size: 8pt)[200 images · 9 diverse types])
 
-    #v(6pt)
-    #grid(
-      columns: (1fr, 1fr, 1fr),
-      gutter: 8pt,
-      // Step 1
-      boxed[
-        #text(size: 10pt, weight: "bold", fill: accent-blue)[① Image Collection]
-        #linebreak()
-        #text(size: 7.5pt)[200 images]
-        #linebreak()
-        #text(size: 7.5pt)[9 diverse types]
-      ],
-      // Step 2
-      boxed[
-        #set text(fill: dark-text)
-        #text(size: 10pt, weight: "bold")[② QA Pair Generation]
-        #linebreak()
-        #text(size: 7.5pt, fill: accent-orange)["Based on the image" (Sec 4.2)]
-        #linebreak()
-        #text(size: 7.5pt)[~12 questions/image, 2,471 total]
-      ],
-      // Step 3
-      boxed[
-        #text(size: 10pt, weight: "bold", fill: accent-purple)[③ 17-Category Tagging]
-        #linebreak()
-        #text(size: 7.5pt, fill: accent-purple)[per question]
-      ],
-    )
+  // Arrow 1→2
+  line((4.5, -3.5), (5.3, -3.5), stroke: c-blue, mark: (end: "stealth"))
 
-    #v(4pt)
-    // Arrows between steps (simulated with centered text)
-    #align(center, text(size: 11pt, fill: accent-blue)[→  →  →])
+  // Step 2: QA Generation
+  rect((5.3, -2.8), (9.0, -4.5), fill: white, stroke: c-orange)
+  content((7.15, -3.1), text(size: 10pt, weight: "bold")[② QA Pair Generation])
+  content((7.15, -3.5), text(size: 7.5pt, fill: c-orange)["Based on the image" (Sec 4.2)])
+  content((7.15, -3.9), text(size: 7.5pt)[~12 questions/image · 2,471 total])
+  content((7.15, -4.2), text(size: 7pt, fill: c-muted)[Yes/No questions, majority are "yes"])
 
-    // === Ambiguity ===
-    #v(6pt)
-    #text(size: 9pt, weight: "bold", fill: accent-red)[⚠️ Ambiguity in QA Generation]
+  // Arrow 2→3
+  line((9.0, -3.5), (10.0, -3.5), stroke: c-blue, mark: (end: "stealth"))
 
-    #v(4pt)
-    #grid(
-      columns: (1fr, 1fr),
-      gutter: 8pt,
-      // Option A
-      boxed(fill: rgb("#fff5f5"), stroke: accent-red)[
-        #set text(fill: accent-red)
-        #text(size: 8.5pt, weight: "bold")[Reading A: VLM → QA from image]
-        #linebreak()
-        #text(size: 7pt)[Supported by: "Based on the image" (Sec 4.2)]
-      ],
-      // Option B
-      boxed(fill: rgb("#fffaf0"), stroke: accent-orange)[
-        #set text(fill: accent-orange)
-        #text(size: 8.5pt, weight: "bold")[Reading B: Caption → QA (like DPG Hard)]
-        #linebreak()
-        #text(size: 7pt)[Supported by: "parallels how we constructed CapsBench"]
-      ],
-    )
+  // Step 3: Categories
+  rect((10.0, -2.8), (13.5, -4.2), fill: white, stroke: c-purple)
+  content((11.75, -3.15), text(size: 10pt, weight: "bold", fill: c-purple)[③ 17-Category Tagging])
+  content((11.75, -3.55), text(size: 8pt, fill: c-purple)[per question])
+  content((11.75, -3.9), text(size: 7pt, fill: c-muted)[General · Color · Entity · ...])
 
-    // === Categories ===
-    #v(6pt)
-    #text(size: 8pt, weight: "bold", fill: accent-purple)[17 Evaluation Categories]
-    #v(2pt)
+  // ---- Ambiguity box ----
+  content((1.0, -4.9), text(size: 9pt, weight: "bold", fill: c-red)[⚠️ Ambiguity in QA Generation])
 
-    #let cat-row(items) = {
-      for item in items {
-        let (name, bg, fg) = item
-        box(
-          width: 1.1in, height: 0.28in,
-          fill: bg, stroke: 0.5pt + fg,
-          radius: 3pt,
-          inset: 2pt,
-          align(center, text(size: 6.5pt, fill: fg, name))
-        )
-        h(2pt)
-      }
-    }
+  rect((1.0, -5.3), (6.5, -6.3), fill: rgb("#fff5f5"), stroke: c-red)
+  content((4.25, -5.55), text(size: 8.5pt, weight: "bold", fill: c-red)[Reading A: VLM looks at image directly])
+  content((4.25, -5.9), text(size: 7pt, fill: c-red)[Supported by: "Based on the image" (Sec 4.2)])
 
-    #cat-row(( 
-      ("General", rgb("#bee3f8"), accent-blue),
-      ("Image Type", rgb("#bee3f8"), accent-blue),
-      ("Text", rgb("#bee3f8"), accent-blue),
-      ("Color", rgb("#bee3f8"), accent-blue),
-      ("Position", rgb("#bee3f8"), accent-blue),
-      ("Relation", rgb("#bee3f8"), accent-blue),
-      ("Rel. Pos.", rgb("#bee3f8"), accent-blue),
-    ))
-    #v(2pt)
-    #cat-row((
-      ("Entity", rgb("#c6f6d5"), accent-green),
-      ("Entity Size", rgb("#c6f6d5"), accent-green),
-      ("Entity Shape", rgb("#c6f6d5"), accent-green),
-      ("Count", rgb("#c6f6d5"), accent-green),
-      ("Emotion", rgb("#c6f6d5"), accent-green),
-      ("Blur", rgb("#fed7d7"), accent-red),
-      ("Img Artifacts", rgb("#fed7d7"), accent-red),
-    ))
-    #v(2pt)
-    #cat-row((
-      ("Proper Noun", rgb("#feebc8"), accent-orange),
-      ("Color Palette", rgb("#e9d8fd"), accent-purple),
-      ("Color Grading", rgb("#e9d8fd"), accent-purple),
-    ))
-  ]
-)
+  rect((8.0, -5.3), (14.0, -6.3), fill: rgb("#fffaf0"), stroke: c-orange)
+  content((11.0, -5.55), text(size: 8.5pt, weight: "bold", fill: c-orange)[Reading B: Caption → QA (like DPG-Hard)])
+  content((11.0, -5.9), text(size: 7pt, fill: c-orange)[Supported by: "parallels how we constructed CapsBench"])
 
-#v(6pt)
-#align(center, text(size: 16pt, fill: accent-blue)[↓])
-#v(6pt)
+  // ---- Category tags ----
+  content((0.8, -6.7), text(size: 8pt, weight: "bold", fill: c-purple)[17 Evaluation Categories])
 
-// =========== Phase 2 ===========
-#block(
-  width: 100%,
-  fill: rgb("#f0fff4"),
-  stroke: 1pt + accent-green,
-  radius: 8pt,
-  inset: 8pt,
-  [
-    #text(size: 11pt, weight: "bold", fill: accent-green)[Phase 2: Caption Evaluation]
+  let cats = (
+    ("General", "#bee3f8", c-blue), ("Image Type", "#bee3f8", c-blue), ("Text", "#bee3f8", c-blue),
+    ("Color", "#bee3f8", c-blue), ("Position", "#bee3f8", c-blue), ("Relation", "#bee3f8", c-blue),
+    ("Rel. Pos.", "#bee3f8", c-blue),
+    ("Entity", "#c6f6d5", c-green), ("Entity Size", "#c6f6d5", c-green), ("Entity Shape", "#c6f6d5", c-green),
+    ("Count", "#c6f6d5", c-green), ("Emotion", "#c6f6d5", c-green),
+    ("Blur", "#fed7d7", c-red), ("Img Artifacts", "#fed7d7", c-red),
+    ("Proper Noun", "#feebc8", c-orange), ("Color Palette", "#e9d8fd", c-purple), ("Color Grading", "#e9d8fd", c-purple),
+  )
 
-    #v(6pt)
-    #grid(
-      columns: (1fr, 1.8fr, 1.2fr, 1fr),
-      gutter: 6pt,
-      // Step 4: Input
-      boxed[
-        #text(size: 10pt, weight: "bold", fill: accent-blue)[Candidate Caption]
-        #linebreak()
-        #text(size: 7pt)[from model under test]
-      ],
-      // Step 5: LLM answers
-      boxed[
-        #text(size: 10pt, weight: "bold", fill: dark-text)[④ LLM Answers Questions]
-        #linebreak()
-        #text(size: 7.5pt, fill: accent-orange)[Claude-3.5 Sonnet]
-        #linebreak()
-        #text(size: 7pt)[Caption only · Yes / No / N/A]
-      ],
-      // Step 6: Consensus
-      boxed[
-        #text(size: 10pt, weight: "bold", fill: accent-purple)[⑤ Consensus (3×)]
-        #linebreak()
-        #text(size: 7pt)[Majority vote per question]
-      ],
-      // Step 7: Score
-      boxed[
-        #text(size: 10pt, weight: "bold", fill: accent-green)[⑥ Accuracy Score]
-        #linebreak()
-        #text(size: 7pt)[Per-category + combined]
-      ],
-    )
-    #align(center, text(size: 11pt, fill: accent-green)[→  →  →])
+  let (cx, cy) = (1.0, -7.1)
+  for (name, bg, fg) in cats {
+    if cx > 14.0 { cx = 1.0; cy -= 0.45 }
+    rect((cx, cy), (cx + 1.5, cy - 0.35), fill: rgb(bg), stroke: fg)
+    content((cx + 0.75, cy - 0.175), text(size: 6.5pt, fill: fg, name))
+    cx += 1.7
+  }
 
-    // Results
-    #v(8pt)
-    #text(size: 10pt, weight: "bold")[Results (Section 7, Claude-3.5 Sonnet as judge):]
-    #v(4pt)
+  // ---- Big arrow to Phase 2 ----
+  line((8.0, -8.5), (8.0, -9.2), stroke: c-blue, mark: (end: "stealth"))
 
-    #grid(
-      columns: (1fr, 1fr, 1fr),
-      gutter: 6pt,
-      boxed(fill: rgb("#c6f6d5"), stroke: accent-green)[
-        #text(size: 10pt, weight: "bold", fill: accent-green)[PG Captioner]
-        #linebreak()
-        #text(size: 11pt, weight: "bold", fill: accent-green)[72.19%]
-      ],
-      boxed(fill: rgb("#e9d8fd"), stroke: accent-purple)[
-        #text(size: 10pt, weight: "bold", fill: accent-purple)[Claude-3.5 Sonnet]
-        #linebreak()
-        #text(size: 11pt, weight: "bold", fill: accent-purple)[71.78%]
-      ],
-      boxed(fill: rgb("#feebc8"), stroke: accent-orange)[
-        #text(size: 10pt, weight: "bold", fill: accent-orange)[GPT-4o]
-        #linebreak()
-        #text(size: 11pt, weight: "bold", fill: accent-orange)[70.66%]
-      ],
-    )
+  // ===================================================
+  // PHASE 2 BACKGROUND
+  // ===================================================
+  rect((0.5, -9.2), (15.5, -16.0), fill: rgb("#f0fff4"), stroke: 1pt + c-green)
+  content((0.8, -9.5), text(size: 10pt, weight: "bold", fill: c-green)[Phase 2: Caption Evaluation])
 
-    #v(4pt)
-    #text(size: 7.5pt, fill: gray-muted)[
-      Weaknesses: entity shape, entity size, visual artifacts — poorly captured by all models
-      #linebreak()
-      Caption length does NOT strongly correlate with CapsBench score
-    ]
-  ]
-)
+  // Step 4: Input
+  rect((1.0, -10.2), (3.0, -11.4), fill: white, stroke: c-blue)
+  content((2.0, -10.5), text(size: 10pt, weight: "bold", fill: c-blue)[Candidate])
+  content((2.0, -10.8), text(size: 10pt, weight: "bold", fill: c-blue)[Caption])
+  content((2.0, -11.15), text(size: 7pt, fill: c-muted)[from model under test])
 
-#v(6pt)
-#text(size: 7pt, fill: gray-muted)[
-  Image types: film scenes, cartoon scenes, movie posters, invitations, ads, casual/street/landscape/interior photography
-  #linebreak()
-  Inspired by DSG (Davidsonian Scene Graph) and DPG-Bench. "Reversed" direction: caption evaluation instead of image evaluation.
-]
+  line((3.0, -10.8), (4.0, -10.8), stroke: c-green, mark: (end: "stealth"))
+
+  // Step 5: LLM QA
+  rect((4.0, -10.0), (7.5, -11.6), fill: white, stroke: c-orange)
+  content((5.75, -10.3), text(size: 10pt, weight: "bold")[④ LLM Answers Questions])
+  content((5.75, -10.7), text(size: 8pt, fill: c-orange)[Claude-3.5 Sonnet])
+  content((5.75, -11.0), text(size: 7.5pt)[Caption only · No image access])
+  content((5.75, -11.35), text(size: 7.5pt)[Output: Yes / No / N/A])
+
+  line((7.5, -10.8), (8.5, -10.8), stroke: c-green, mark: (end: "stealth"))
+
+  // Step 6: Consensus
+  rect((8.5, -10.2), (10.5, -11.4), fill: white, stroke: c-purple)
+  content((9.5, -10.5), text(size: 10pt, weight: "bold", fill: c-purple)[⑤ Consensus])
+  content((9.5, -10.9), text(size: 10pt, weight: "bold", fill: c-purple)[(3×)])
+  content((9.5, -11.2), text(size: 7.5pt, fill: c-muted)[Majority vote per question])
+
+  line((10.5, -10.8), (11.5, -10.8), stroke: c-green, mark: (end: "stealth"))
+
+  // Step 7: Score
+  rect((11.5, -10.2), (13.5, -11.4), fill: white, stroke: c-green)
+  content((12.5, -10.5), text(size: 10pt, weight: "bold", fill: c-green)[⑥ Accuracy])
+  content((12.5, -10.9), text(size: 10pt, weight: "bold", fill: c-green)[Score])
+  content((12.5, -11.2), text(size: 7.5pt, fill: c-muted)[per-category])
+
+  // ---- Results ----
+  content((1.0, -12.2), text(size: 9pt, weight: "bold")[Results (Sec 7, Claude-3.5 Sonnet as judge):])
+
+  rect((1.0, -12.7), (4.5, -13.4), fill: rgb("#c6f6d5"), stroke: c-green)
+  content((2.75, -12.95), text(size: 9pt, weight: "bold", fill: c-green)[PG Captioner])
+  content((2.75, -13.2), text(size: 11pt, weight: "bold", fill: c-green)[72.19%])
+
+  rect((5.5, -12.7), (9.5, -13.4), fill: rgb("#e9d8fd"), stroke: c-purple)
+  content((7.5, -12.95), text(size: 9pt, weight: "bold", fill: c-purple)[Claude-3.5 Sonnet])
+  content((7.5, -13.2), text(size: 11pt, weight: "bold", fill: c-purple)[71.78%])
+
+  rect((10.5, -12.7), (14.0, -13.4), fill: rgb("#feebc8"), stroke: c-orange)
+  content((12.25, -12.95), text(size: 9pt, weight: "bold", fill: c-orange)[GPT-4o])
+  content((12.25, -13.2), text(size: 11pt, weight: "bold", fill: c-orange)[70.66%])
+
+  content((1.0, -14.0), text(size: 7.5pt, fill: c-muted)[Weaknesses: entity shape, entity size, visual artifacts — poorly captured by all models])
+  content((1.0, -14.4), text(size: 7.5pt, fill: c-muted)[Caption length does NOT strongly correlate with CapsBench score])
+
+  // ---- Footnotes ----
+  content((1.0, -15.2), text(size: 6.5pt, fill: c-muted)[\* Image types: film scenes, cartoon scenes, movie posters, invitations, ads, casual/street/landscape/interior photography])
+  content((1.0, -15.6), text(size: 6.5pt, fill: c-muted)[Inspired by DSG and DPG-Bench. "Reversed" direction: caption evaluation instead of image evaluation.])
+})
